@@ -1,13 +1,24 @@
+class Speedband {
+  constructor() {
+
+  }
+
+  
+}
+
 export class MapController {
   constructor(mapDivId, centreCoords) {
     if (!document.querySelector(`#${mapDivId}`)) return;
 
     this.map = L.map(mapDivId).setView(centreCoords, 12);
+    this.centreCoords = centreCoords;
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(this.map);
+
+    this.addCentreMapButton(mapDivId);
 
     fetch("./data/viable_markers.json").then(text => text.json().then((obj) => {
       this.addMarkers(obj);
@@ -17,16 +28,19 @@ export class MapController {
   addCentreMapButton(mapDivId) {
     const mapDiv = document.querySelector(`#${mapDivId}`);
 
-    let centreButton = new Element("button");
+    let centreButton = document.createElement("button");
     centreButton.id = "centre-button";
-    centreButton.style.left = (document.documentElement.clientWidth / 2) - (centreButton.clientWidth / 2) + "px";
+    centreButton.innerHTML = "Centre Map";
     centreButton.addEventListener("click", this.centreMap.bind(this));
 
     mapDiv.prepend(centreButton);
+
+    // Centre button after it has been rendered so we know its width
+    centreButton.style.left = (document.documentElement.clientWidth / 2) - (centreButton.clientWidth / 2) + "px";
   }
 
   centreMap() {
-    this.map.setView(centreCoords, 12);
+    this.map.setView(this.centreCoords, 12);
   }
 
   addMarkers(markerList) {
