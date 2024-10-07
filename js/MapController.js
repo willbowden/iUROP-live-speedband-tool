@@ -1,14 +1,94 @@
 class Speedband {
-  constructor() {
+  constructor(mapRef, pathObj, startMarkerObj, endMarkerObj, cameraMarkerObj) {
+    this.id = startMarkerObj.coords;
+    this._selected = false;
 
+    this._startMarker = this.addMarker(mapRef, startMarkerObj);
+    this._cameraMarker = this.addMarker(mapRef, cameraMarkerObj);
+    this._endMarker = this.addMarker(mapRef, endMarkerObj);
+    this._path = this.addPath(mapRef, pathObj);
+
+    const elementClicked = () => {
+      const ev = new CustomEvent("speedband-selected", { detail: { id: this.id } });
+      document.dispatchEvent(ev);
+    }
+
+    this._startMarker.on("click", elementClicked.bind(this));
+    this._endMarker.on("click", elementClicked.bind(this));
+    this._cameraMarker.on("click", elementClicked.bind(this));
+    this._path.on("click", elementClicked.bind(this));
   }
 
-  
+  setSelected(value) {
+    this._selected = value;
+    this.setOpacities(this._selected ? 1 : 0.5);
+  }
+
+  setOpacities(val) {
+    this._startMarker.setOpacity(val);
+    this._endMarker.setOpacity(val);
+    this._cameraMarker.setOpacity(val);
+    this._path.setStyle({opacity: val});
+  }
+
+  addMarker(mapRef, marker) {
+    let coords = marker.coords.split(",").map((coord) => parseFloat(coord));
+
+    let iconName, popupText;
+
+    switch (marker.label) {
+      case "S":
+        iconName = "bi-1-circle-fill";
+        popupText = "Speedband Start";
+        break;
+      case "E":
+        iconName = "bi-2-circle-fill";
+        popupText = "Speedband End";
+        break;
+      case "C":
+        iconName = "bi-camera-fill";
+        popupText = "Camera Location"
+        break;
+      default:
+        iconName = "bi-circle-fill";
+    }
+
+    return L.marker(
+      coords,
+      {
+        icon: L.AwesomeMarkers.icon({
+          prefix: "bi",
+          icon: iconName,
+          markerColor: marker.color,
+        }),
+        opacity: this._selected ? 1 : 0.5
+      }
+    ).addTo(mapRef).bindPopup(popupText);
+  }
+
+  addPath(mapRef, path) {
+    const coords = [
+      path.start.split(",").map((coord) => parseFloat(coord)),
+      path.end.split(",").map((coord) => parseFloat(coord))
+    ];
+
+    return L.polyline(
+      coords,
+      {
+        color: path.color,
+        weight: path.weight,
+        opacity: this._selected ? 1 : 0.5
+      }
+    ).addTo(mapRef).bindPopup(path.label);
+  }
 }
 
 export class MapController {
   constructor(mapDivId, centreCoords) {
     if (!document.querySelector(`#${mapDivId}`)) return;
+
+    this.speedbands = [];
+    this.selectedSpeedbandIds = [];
 
     this.map = L.map(mapDivId).setView(centreCoords, 12);
     this.centreCoords = centreCoords;
@@ -21,8 +101,23 @@ export class MapController {
     this.addCentreMapButton(mapDivId);
 
     fetch("./data/viable_markers.json").then(text => text.json().then((obj) => {
-      this.addMarkers(obj);
+      this.addSpeedbands(obj);
     }))
+
+    document.addEventListener("speedband-selected", this.selectSpeedband.bind(this));
+  }
+
+  selectSpeedband(event) {
+    const id = event.detail.id;
+    const sb = this.speedbands.find((band) => band.id === id);
+
+    if (this.selectedSpeedbandIds.includes(id)) {
+      this.selectedSpeedbandIds = this.selectedSpeedbandIds.filter((bandId) => bandId !== id);
+      sb.setSelected(false);
+    } else {
+      this.selectedSpeedbandIds.push(id);
+      sb.setSelected(true);
+    }
   }
 
   addCentreMapButton(mapDivId) {
@@ -43,66 +138,9 @@ export class MapController {
     this.map.setView(this.centreCoords, 12);
   }
 
-  addMarkers(markerList) {
-    for (const marker of markerList) {
-      switch (marker.objectType) {
-        case "path":
-          this.addPath(marker);
-          break;
-        case "marker":
-          this.addMarker(marker);
-          break;
-      }
+  addSpeedbands(m) {
+    for (let i = 0; i < m.length; i += 4) {
+      this.speedbands.push(new Speedband(this.map, m[i], m[i + 1], m[i + 2], m[i + 3]));
     }
-  }
-
-  addPath(pathObj) {
-    const coords = [
-      pathObj.start.split(",").map((coord) => parseFloat(coord)),
-      pathObj.end.split(",").map((coord) => parseFloat(coord))
-    ];
-
-    L.polyline(
-      coords,
-      {
-        color: pathObj.color,
-        weight: pathObj.weight,
-      }
-    ).addTo(this.map).bindPopup(pathObj.label);
-  }
-
-  addMarker(markerObj) {
-    let coords = markerObj.coords.split(",").map((coord) => parseFloat(coord));
-
-    let iconName, popupText;
-
-    switch (markerObj.label) {
-      case "S":
-        iconName = "bi-1-circle-fill";
-        popupText = "Speedband Start";
-        break;
-      case "E":
-        iconName = "bi-2-circle-fill";
-        popupText = "Speedband End";
-        break;
-      case "C":
-        iconName = "bi-camera-fill";
-        popupText = "Camera Location"
-        break;
-      default:
-        iconName = "bi-circle-fill";
-    }
-
-    L.marker(
-      coords,
-      {
-        icon: L.AwesomeMarkers.icon({
-          prefix: "bi",
-          icon: iconName,
-          markerColor: markerObj.color,
-        }),
-      }
-    ).addTo(this.map).bindPopup(popupText);
-
   }
 }
