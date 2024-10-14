@@ -32,7 +32,12 @@ class SelectorList {
         <td>${band.roadName}</td>
       </tr>`;
 
-      tableElem.append(rowElem)
+      rowElem.addEventListener("click", () => {
+        const ev = new CustomEvent("speedband-selected", { detail: { id: band.id } });
+        document.dispatchEvent(ev);
+      })
+
+      tableElem.append(rowElem);
     })
 
     return tableElem;
