@@ -1,6 +1,48 @@
+class SelectorList {
+  constructor(speedbands) {
+    const element = document.createElement("div");
+    element.className = "speedband-selector";
+
+    const table = this.generateTable(speedbands);
+    element.append(table);
+    console.log(table);
+
+    document.body.prepend(element)
+  }
+
+  static shortenCoords(coords) {
+    return coords.split(",").map(val => parseFloat(val).toFixed(4)).join(", ");
+  }
+
+  generateTable(speedbands) {
+    let tableElem = document.createElement("table")
+    tableElem.innerHTML = `
+    <tr>
+      <th>Check</th>
+      <th>Coords</th>
+      <th>Road Name</th>
+    </tr>`;
+
+    speedbands.forEach(band => {
+      let rowElem = document.createElement("tr")
+      rowElem.innerHTML = `
+      <tr>
+        <td>NO</td>
+        <td>${SelectorList.shortenCoords(band.id)}</td>
+        <td>${band.roadName}</td>
+      </tr>`;
+
+      tableElem.append(rowElem)
+    })
+
+    return tableElem;
+  }
+}
+
 class Speedband {
   constructor(mapRef, pathObj, startMarkerObj, endMarkerObj, cameraMarkerObj) {
     this.id = startMarkerObj.coords;
+    this.roadName = pathObj.label
     this._selected = false;
 
     this._startMarker = this.addMarker(mapRef, startMarkerObj);
@@ -28,7 +70,7 @@ class Speedband {
     this._startMarker.setOpacity(val);
     this._endMarker.setOpacity(val);
     this._cameraMarker.setOpacity(val);
-    this._path.setStyle({opacity: val});
+    this._path.setStyle({ opacity: val });
   }
 
   addMarker(mapRef, marker) {
@@ -90,19 +132,23 @@ export class MapController {
     this.speedbands = [];
     this.selectedSpeedbandIds = [];
 
-    this.map = L.map(mapDivId).setView(centreCoords, 12);
+    this.map = L.map(mapDivId, { zoomControl: false }).setView(centreCoords, 12);
     this.centreCoords = centreCoords;
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
     }).addTo(this.map);
+
+    L.control.zoom({ position: "bottomright" }).addTo(this.map);
 
     this.addCentreMapButton(mapDivId);
 
     fetch("./data/viable_markers.json").then(text => text.json().then((obj) => {
       this.addSpeedbands(obj);
+      let s = new SelectorList(this.speedbands);
     }))
+
 
     document.addEventListener("speedband-selected", this.selectSpeedband.bind(this));
   }
@@ -120,15 +166,13 @@ export class MapController {
     }
   }
 
-  addCentreMapButton(mapDivId) {
-    const mapDiv = document.querySelector(`#${mapDivId}`);
-
+  addCentreMapButton() {
     let centreButton = document.createElement("button");
     centreButton.id = "centre-button";
     centreButton.innerHTML = "Centre Map";
     centreButton.addEventListener("click", this.centreMap.bind(this));
 
-    mapDiv.prepend(centreButton);
+    document.body.prepend(centreButton);
 
     // Centre button after it has been rendered so we know its width
     centreButton.style.left = (document.documentElement.clientWidth / 2) - (centreButton.clientWidth / 2) + "px";
