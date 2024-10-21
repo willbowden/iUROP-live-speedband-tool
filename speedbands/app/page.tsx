@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div>
-      <Map />
+      <Map position={[1.28960592759792, 103.84835955306676]} zoom={12}/>
     </div>
   );
 }
