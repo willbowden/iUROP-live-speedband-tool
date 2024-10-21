@@ -1,8 +1,8 @@
-import { StringToCoords } from "@/util/stringCoordsToLatLng";
+import { LatLngExpression } from "leaflet";
 import { Marker } from "react-leaflet";
 
 type MarkerProps = {
-  coords: string;
+  coords: LatLngExpression;
   label: string;
   color: string;
   opacity: number;
@@ -10,6 +10,6 @@ type MarkerProps = {
 
 export default function MapMarker({ coords, label, color, opacity }: MarkerProps) {
   return (
-    <Marker position={StringToCoords(coords)} opacity={opacity} />
+    <Marker position={coords} opacity={opacity} />
   )
 }

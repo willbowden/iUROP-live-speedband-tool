@@ -1,3 +1,4 @@
+import { StringToCoords } from "@/util/stringCoordsToLatLng";
 import MapMarker from "./Marker";
 import MapPath from "./Path";
 
@@ -16,12 +17,14 @@ type SpeedbandProps = {
 }
 
 export default function Speedband({ markers }: SpeedbandProps) {
+  const defaultLatLng = {lat: 0, lng: 0};
+
   return (
     <>
       {markers.map(marker => {
         if (marker.objectType == "marker") {
           return <MapMarker
-            coords={marker.coords || ""}
+            coords={marker.coords ? StringToCoords(marker.coords) : defaultLatLng}
             label={marker.label}
             color={marker.color}
             opacity={1}
@@ -29,8 +32,8 @@ export default function Speedband({ markers }: SpeedbandProps) {
         } else if (marker.objectType == "path") {
           return <MapPath
             whenSelected={() => { }}
-            start={marker.start || ""}
-            end={marker.end || ""}
+            start={marker.start ? StringToCoords(marker.start) : defaultLatLng}
+            end={marker.end ? StringToCoords(marker.end) : defaultLatLng}
             color={marker.color}
             label={marker.label}
             weight={marker.weight || 10}

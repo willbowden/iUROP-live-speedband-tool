@@ -1,10 +1,10 @@
+import { LatLngExpression } from "leaflet";
 import { Polyline } from "react-leaflet";
-import { StringToCoords } from "@/util/stringCoordsToLatLng";
 
 type PathProps = {
   whenSelected: () => void;
-  start: string;
-  end: string;
+  start: LatLngExpression;
+  end: LatLngExpression;
   color: string;
   weight: number;
   label: string;
@@ -17,8 +17,7 @@ export default function MapPath({whenSelected, start, end, color, weight, label,
   }
 
   const positions = [
-    StringToCoords(start),
-    StringToCoords(end),
+    start, end
   ];
 
   return (
