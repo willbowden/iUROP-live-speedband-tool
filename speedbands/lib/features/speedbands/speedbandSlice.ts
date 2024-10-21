@@ -1,6 +1,10 @@
 import { createAppAsyncThunk } from "@/lib/store";
 import { createSlice } from "@reduxjs/toolkit";
 
+interface SpeedbandState {
+  speedbands: {};
+}
+
 export const speedbandSlice = createSlice({
   name: "Speedbands",
   initialState: {
@@ -14,8 +18,10 @@ export const speedbandSlice = createSlice({
 })
 
 export const fetchSpeedbands = createAppAsyncThunk('posts/fetchPosts', async () => {
-  const response = await fetch("./")
-  return response.data
+  const response = await fetch("./");
+  const data = await response.json();
+
+  return data;
 })
 
 export default speedbandSlice.reducer

@@ -1,0 +1,1354 @@
+[
+  {
+    "objectType": "path",
+    "start": "1.3441100851209409, 103.78616341269772",
+    "end": "1.3436196253925363, 103.78499221155268",
+    "color": "cyan",
+    "weight": 10,
+    "label": "PAN ISLAND EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3441100851209409, 103.78616341269772",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3436196253925363, 103.78499221155268",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.344205, 103.78577",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2894858180109154, 103.86162633143994",
+    "end": "1.291272977695459, 103.86169210647662",
+    "color": "cyan",
+    "weight": 10,
+    "label": "EAST COAST PARKWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2894858180109154, 103.86162633143994",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.291272977695459, 103.86169210647662",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.29158484, 103.8615987",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.301513733916148, 103.91056463858123",
+    "end": "1.3018002773079511, 103.9115787270102",
+    "color": "cyan",
+    "weight": 10,
+    "label": "EAST COAST PARKWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.301513733916148, 103.91056463858123",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3018002773079511, 103.9115787270102",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.301451452, 103.9105963",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.329305241513514, 103.84148517247998",
+    "end": "1.328888757409722, 103.84055379155676",
+    "color": "cyan",
+    "weight": 10,
+    "label": "PAN ISLAND EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.329305241513514, 103.84148517247998",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.328888757409722, 103.84055379155676",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.328899, 103.84121",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2984552950674046, 103.89798427688991",
+    "end": "1.297452094745137, 103.8982621080313",
+    "color": "cyan",
+    "weight": 10,
+    "label": "TANJONG KATONG ROAD SOUTH"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2984552950674046, 103.89798427688991",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.297452094745137, 103.8982621080313",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.297512569, 103.8983019",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3261677429253291, 103.90578953842336",
+    "end": "1.326535619880043, 103.90701319962626",
+    "color": "cyan",
+    "weight": 10,
+    "label": "PAN ISLAND EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3261677429253291, 103.90578953842336",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.326535619880043, 103.90701319962626",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.326024822, 103.905625",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.330501574036978, 103.91548174053663",
+    "end": "1.3311932089604106, 103.91694586930784",
+    "color": "cyan",
+    "weight": 10,
+    "label": "PAN ISLAND EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.330501574036978, 103.91548174053663",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3311932089604106, 103.91694586930784",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3309693, 103.9168616",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2787333038311326, 103.82382367911131",
+    "end": "1.278075038925227, 103.82504230479924",
+    "color": "cyan",
+    "weight": 10,
+    "label": "AYER RAJAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2787333038311326, 103.82382367911131",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.278075038925227, 103.82504230479924",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.27877, 103.82375",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3245066177785756, 103.87207833045842",
+    "end": "1.323730745259791, 103.8726616771658",
+    "color": "cyan",
+    "weight": 10,
+    "label": "PAN ISLAND EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3245066177785756, 103.87207833045842",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.323730745259791, 103.8726616771658",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.323957439, 103.8728576",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3200087734804484, 103.8762597888554",
+    "end": "1.3201936719122571, 103.8772250075436",
+    "color": "cyan",
+    "weight": 10,
+    "label": "ALJUNIED WEST FLYOVER"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3200087734804484, 103.8762597888554",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3201936719122571, 103.8772250075436",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.320360781, 103.8771741",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2856226340093184, 103.83779902301367",
+    "end": "1.284571673108064, 103.83680272049128",
+    "color": "cyan",
+    "weight": 10,
+    "label": "CHIN SWEE ROAD"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2856226340093184, 103.83779902301367",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.284571673108064, 103.83680272049128",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.285693989, 103.8375245",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2798791493486743, 103.8296926102903",
+    "end": "1.280601638428846, 103.8304515505814",
+    "color": "cyan",
+    "weight": 10,
+    "label": "CENTRAL EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2798791493486743, 103.8296926102903",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.280601638428846, 103.8304515505814",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.280365843, 103.8304511",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3374012387388876, 103.978183492029",
+    "end": "1.338154502591772, 103.97706375592284",
+    "color": "cyan",
+    "weight": 10,
+    "label": "EAST COAST PARKWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3374012387388876, 103.978183492029",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.338154502591772, 103.97706375592284",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.33771, 103.977827",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3265750422692364, 103.82690129151008",
+    "end": "1.3273293321448392, 103.82537697226584",
+    "color": "cyan",
+    "weight": 10,
+    "label": "PAN ISLAND EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3265750422692364, 103.82690129151008",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3273293321448392, 103.82537697226584",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.326574036, 103.8268573",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.341560956107131, 103.94691523361446",
+    "end": "1.3404500316402077, 103.9456657557846",
+    "color": "cyan",
+    "weight": 10,
+    "label": "PAN ISLAND EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.341560956107131, 103.94691523361446",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3404500316402077, 103.9456657557846",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.340298, 103.945652",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3284258467377124, 103.97430726865096",
+    "end": "1.3273480335380676, 103.9735833160783",
+    "color": "cyan",
+    "weight": 10,
+    "label": "EAST COAST PARKWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3284258467377124, 103.97430726865096",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3273480335380676, 103.9735833160783",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.32743, 103.97383",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3944859312046332, 103.83450684238667",
+    "end": "1.394837890475923, 103.83593022884855",
+    "color": "cyan",
+    "weight": 10,
+    "label": "SELETAR EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3944859312046332, 103.83450684238667",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.394837890475923, 103.83593022884855",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.39466333, 103.834746",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3275497012219115, 103.86172836648169",
+    "end": "1.3285943640566584, 103.862136735764",
+    "color": "cyan",
+    "weight": 10,
+    "label": "CENTRAL EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3275497012219115, 103.86172836648169",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3285943640566584, 103.862136735764",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.328147222, 103.8622033",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.412642601346962, 103.8064595486871",
+    "end": "1.4112243570166714, 103.80700700148648",
+    "color": "cyan",
+    "weight": 10,
+    "label": "SELETAR EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.412642601346962, 103.8064595486871",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.4112243570166714, 103.80700700148648",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.41270056, 103.8064271",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3875622410247723, 103.85824306441847",
+    "end": "1.3887768403285647, 103.8580350115358",
+    "color": "cyan",
+    "weight": 10,
+    "label": "CENTRAL EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3875622410247723, 103.85824306441847",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3887768403285647, 103.8580350115358",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.38861, 103.85806",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.4259065049688824, 103.7879754673467",
+    "end": "1.4262076423117271, 103.7867431600187",
+    "color": "cyan",
+    "weight": 10,
+    "label": "SELETAR EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.4259065049688824, 103.7879754673467",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.4262076423117271, 103.7867431600187",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.42627712, 103.7871664",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3899309653588685, 103.7486160954201",
+    "end": "1.3897336551878234, 103.7499847248648",
+    "color": "cyan",
+    "weight": 10,
+    "label": "CHOA CHU KANG DRIVE"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3899309653588685, 103.7486160954201",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3897336551878234, 103.7499847248648",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3899, 103.74843",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3247893635307513, 103.8592874317101",
+    "end": "1.3238975344296364, 103.85832191776572",
+    "color": "cyan",
+    "weight": 10,
+    "label": "CENTRAL EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3247893635307513, 103.8592874317101",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3238975344296364, 103.85832191776572",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.323604823, 103.8587802",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3105991287773198, 103.76413083455584",
+    "end": "1.3096032501682369, 103.76504345395216",
+    "color": "cyan",
+    "weight": 10,
+    "label": "AYER RAJAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3105991287773198, 103.76413083455584",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3096032501682369, 103.76504345395216",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.31023, 103.76438",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3855009081195804, 103.74028064765876",
+    "end": "1.3866054028652464, 103.74156683446697",
+    "color": "cyan",
+    "weight": 10,
+    "label": "KRANJI EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3855009081195804, 103.74028064765876",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3866054028652464, 103.74156683446697",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.38647, 103.74143",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3325083214954738, 103.76904948999758",
+    "end": "1.3330852996096512, 103.7705557429388",
+    "color": "cyan",
+    "weight": 10,
+    "label": "PAN ISLAND EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3325083214954738, 103.76904948999758",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3330852996096512, 103.7705557429388",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.332691, 103.770278",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.351500463261179, 103.85755177764791",
+    "end": "1.352801386450744, 103.85713660905402",
+    "color": "cyan",
+    "weight": 10,
+    "label": "CENTRAL EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.351500463261179, 103.85755177764791",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.352801386450744, 103.85713660905402",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.35296, 103.85719",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.4292605162576928, 103.76939150989864",
+    "end": "1.4306103223449134, 103.768704174753",
+    "color": "cyan",
+    "weight": 10,
+    "label": "BUKIT TIMAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.4292605162576928, 103.76939150989864",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.4306103223449134, 103.768704174753",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.429588536, 103.769311",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2988947311498005, 103.78051840645524",
+    "end": "1.298105648138978, 103.78192714209852",
+    "color": "cyan",
+    "weight": 10,
+    "label": "AYER RAJAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2988947311498005, 103.78051840645524",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.298105648138978, 103.78192714209852",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.29792, 103.78205",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3264024204854308, 103.73206239205432",
+    "end": "1.326075552639828, 103.73066035731964",
+    "color": "cyan",
+    "weight": 10,
+    "label": "AYER RAJAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3264024204854308, 103.73206239205432",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.326075552639828, 103.73066035731964",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.32618, 103.73028",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.365930052875766, 103.70863188981026",
+    "end": "1.3662576898617664, 103.70889459590842",
+    "color": "cyan",
+    "weight": 10,
+    "label": "PAN ISLAND EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.365930052875766, 103.70863188981026",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3662576898617664, 103.70889459590842",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3664, 103.70899",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3321915196564234, 103.81751098398574",
+    "end": "1.3318270643326893, 103.81807573797391",
+    "color": "cyan",
+    "weight": 10,
+    "label": "ADAM ROAD"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3321915196564234, 103.81751098398574",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3318270643326893, 103.81807573797391",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.332124, 103.81768",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3493315225341391, 103.79160395556782",
+    "end": "1.350799117998366, 103.7906998772477",
+    "color": "cyan",
+    "weight": 10,
+    "label": "BUKIT TIMAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3493315225341391, 103.79160395556782",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.350799117998366, 103.7906998772477",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.350477908, 103.7910336",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3860633896031735, 103.77498489301873",
+    "end": "1.3876947419407284, 103.77453441459424",
+    "color": "cyan",
+    "weight": 10,
+    "label": "BUKIT TIMAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3860633896031735, 103.77498489301873",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3876947419407284, 103.77453441459424",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3865, 103.7747",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.399961548758433, 103.85671434791396",
+    "end": "1.400499613524258, 103.85804274474454",
+    "color": "cyan",
+    "weight": 10,
+    "label": "SELETAR EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.399961548758433, 103.85671434791396",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.400499613524258, 103.85804274474454",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.40002575, 103.8570253",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2724557804201406, 103.83238494721076",
+    "end": "1.2723160381048562, 103.83309544610437",
+    "color": "cyan",
+    "weight": 10,
+    "label": "AYER RAJAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2724557804201406, 103.83238494721076",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2723160381048562, 103.83309544610437",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.27237, 103.8324",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.295610008464168, 103.88014033510846",
+    "end": "1.2956742576674545, 103.8818842738069",
+    "color": "cyan",
+    "weight": 10,
+    "label": "EAST COAST PARKWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.295610008464168, 103.88014033510846",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2956742576674545, 103.8818842738069",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.295855016, 103.8803147",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3772517802589537, 103.9284068020047",
+    "end": "1.3768263944427757, 103.92954188789984",
+    "color": "cyan",
+    "weight": 10,
+    "label": "TAMPINES EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3772517802589537, 103.9284068020047",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3768263944427757, 103.92954188789984",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.37704704, 103.9294698",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2875263383331863, 103.79525498153671",
+    "end": "1.286964534628196, 103.79625137215068",
+    "color": "cyan",
+    "weight": 10,
+    "label": "AYER RAJAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2875263383331863, 103.79525498153671",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.286964534628196, 103.79625137215068",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2871, 103.79633",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3805551261654982, 103.91976230806137",
+    "end": "1.379804395616717, 103.92051735189705",
+    "color": "cyan",
+    "weight": 10,
+    "label": "HALUS LINK"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3805551261654982, 103.91976230806137",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.379804395616717, 103.92051735189705",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.37988658, 103.9200917",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3383099070402464, 103.98026667627836",
+    "end": "1.3398213153899443, 103.98111043877248",
+    "color": "cyan",
+    "weight": 10,
+    "label": "PAN ISLAND EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3383099070402464, 103.98026667627836",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3398213153899443, 103.98111043877248",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.33831, 103.98032",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2996764969597443, 103.77910681274476",
+    "end": "1.2988947311498005, 103.78051840645524",
+    "color": "cyan",
+    "weight": 10,
+    "label": "AYER RAJAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2996764969597443, 103.77910681274476",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2988947311498005, 103.78051840645524",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.29939, 103.7799",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3125393163477197, 103.7622472702445",
+    "end": "1.3115767563539924, 103.76319746745968",
+    "color": "cyan",
+    "weight": 10,
+    "label": "AYER RAJAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3125393163477197, 103.7622472702445",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3115767563539924, 103.76319746745968",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.312019, 103.763002",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3489093170955406, 103.79642471417952",
+    "end": "1.3493011329580702, 103.7952615729302",
+    "color": "cyan",
+    "weight": 10,
+    "label": "PAN ISLAND EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3489093170955406, 103.79642471417952",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3493011329580702, 103.7952615729302",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.349428893, 103.7952799",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3401823864660314, 103.64536935200896",
+    "end": "1.3414041131313883, 103.6440884855044",
+    "color": "cyan",
+    "weight": 10,
+    "label": "AYER RAJAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3401823864660314, 103.64536935200896",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3414041131313883, 103.6440884855044",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.341244001, 103.6439134",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3475702253089743, 103.63725933670496",
+    "end": "1.3467145087316852, 103.6384557882485",
+    "color": "cyan",
+    "weight": 10,
+    "label": "TUAS CHECKPOINT VIADUCT"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3475702253089743, 103.63725933670496",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3467145087316852, 103.6384557882485",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.347645829, 103.6366955",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3222539158949034, 103.75073056671832",
+    "end": "1.3217975502817552, 103.7521972700326",
+    "color": "cyan",
+    "weight": 10,
+    "label": "AYER RAJAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3222539158949034, 103.75073056671832",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3217975502817552, 103.7521972700326",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.32153, 103.75273",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.4127678972186186, 103.77144589753144",
+    "end": "1.414566865013272, 103.77141003223043",
+    "color": "cyan",
+    "weight": 10,
+    "label": "BUKIT TIMAH EXPRESSWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.4127678972186186, 103.77144589753144",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.414566865013272, 103.77141003223043",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.414142, 103.771168",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2598040758731706, 103.82378589314465",
+    "end": "1.2614005335611, 103.82381809070095",
+    "color": "cyan",
+    "weight": 10,
+    "label": "SENTOSA GATEWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2598040758731706, 103.82378589314465",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2614005335611, 103.82381809070095",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.259999997, 103.8236111",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2942778725303583, 103.8764768352065",
+    "end": "1.2928783733658635, 103.87564521071556",
+    "color": "cyan",
+    "weight": 10,
+    "label": "EAST COAST PARKWAY"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2942778725303583, 103.8764768352065",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2928783733658635, 103.87564521071556",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.294098914, 103.8760562",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.3551199160025549, 103.90089186660416",
+    "end": "1.3566797294063633, 103.90174642704795",
+    "color": "cyan",
+    "weight": 10,
+    "label": "KALLANG PAYA LEBAR EXPRESSWAY TUNNEL"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3551199160025549, 103.90089186660416",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.3566797294063633, 103.90174642704795",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.357098686, 103.902042",
+    "color": "blue",
+    "label": "C"
+  },
+  {
+    "objectType": "path",
+    "start": "1.2743120921829671, 103.85090987473896",
+    "end": "1.2739486112710108, 103.85198380232512",
+    "color": "cyan",
+    "weight": 10,
+    "label": "STRAITS BOULEVARD"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2743120921829671, 103.85090987473896",
+    "color": "green",
+    "label": "S"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.2739486112710108, 103.85198380232512",
+    "color": "red",
+    "label": "E"
+  },
+  {
+    "objectType": "marker",
+    "coords": "1.274143944, 103.8513168",
+    "color": "blue",
+    "label": "C"
+  }
+]
