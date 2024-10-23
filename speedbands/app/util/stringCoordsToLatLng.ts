@@ -1,6 +1,6 @@
-import { LatLng, LatLngExpression } from "leaflet";
+import { LatLng } from "leaflet";
 
-export function StringToCoords(input?: string): LatLngExpression {
+export function stringToCoords(input?: string): LatLng {
   if (input === undefined) {
     return new LatLng(0, 0);
   }
@@ -8,4 +8,8 @@ export function StringToCoords(input?: string): LatLngExpression {
   const asFloats = input.split(",").map(val => parseFloat(val));
   
   return new LatLng(asFloats[0], asFloats[1]);
+}
+
+export function prettyCoords(input: LatLng): string {
+  return `${input.lat.toFixed(4)}, ${input.lng.toFixed(4)}`;
 }

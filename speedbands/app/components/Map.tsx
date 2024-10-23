@@ -6,10 +6,10 @@ import "leaflet/dist/leaflet.css"
 import { MapContainer, TileLayer } from "react-leaflet"
 import SpeedbandAnnotation from "./Speedband"
 import { Speedband } from "@/lib/speedband"
-import { LatLngExpression } from "leaflet"
+import { LatLng } from "leaflet"
 
 type MapProps = {
-  position: LatLngExpression;
+  position: LatLng;
   zoom: number;
   className: string;
   speedbands: Array<Speedband>;
@@ -24,7 +24,7 @@ export default function Map({position, zoom, className, speedbands}: MapProps) {
     />
     {speedbands.map(band => {
       return <SpeedbandAnnotation
-        band={band}>
+        speedband={band}>
       </SpeedbandAnnotation>
     })}
   </MapContainer>

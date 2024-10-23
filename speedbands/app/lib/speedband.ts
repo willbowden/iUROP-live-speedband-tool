@@ -1,5 +1,5 @@
-import { StringToCoords } from "@/util/stringCoordsToLatLng";
-import { LatLngExpression } from "leaflet";
+import { stringToCoords } from "@/util/stringCoordsToLatLng";
+import { LatLng } from "leaflet";
 
 export interface MarkerJson {
   objectType: "marker" | "path";
@@ -12,26 +12,27 @@ export interface MarkerJson {
 }
 
 export interface MarkerObj {
-  coords: LatLngExpression;
+  coords: LatLng;
   color: string;
   label: string;
 }
 
 export interface PathObj {
-  start: LatLngExpression;
-  end: LatLngExpression;
+  start: LatLng;
+  end: LatLng;
   color: string;
   weight: number;
   label: string;
 }
 
 export class Speedband {
+  id: LatLng;
   start!: MarkerObj;
   end!: MarkerObj;
   camera!: MarkerObj;
   path!: PathObj;
 
-  static JsonToSpeedbands(markers: Array<MarkerJson>): Array<Speedband> {
+  static jsonToSpeedbands(markers: Array<MarkerJson>): Array<Speedband> {
     let out = [];
   
     for (let i = 0; i < markers.length; i += 4) {
@@ -45,15 +46,15 @@ export class Speedband {
     markers.forEach(m => {
       if (m.objectType == "path") {
         this.path = {
-          start: StringToCoords(m.start),
-          end: StringToCoords(m.end),
+          start: stringToCoords(m.start),
+          end: stringToCoords(m.end),
           color: m.color,
           weight: m.weight || 10,
           label: m.label,
         }
       } else if (m.objectType == "marker") {
         let newMarker = {
-          coords: StringToCoords(m.coords),
+          coords: stringToCoords(m.coords),
           color: m.color,
           label: m.label,
         }
@@ -70,10 +71,11 @@ export class Speedband {
         }
       }
     })
+
+    this.id = this.start.coords;
   }
 
   get markers() {
     return [this.start, this.end, this.camera];
   }
-
 }

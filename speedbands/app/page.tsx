@@ -20,7 +20,7 @@ export default function Home() {
 
   useEffect(() => {
     fetch("https://raw.githubusercontent.com/willbowden/iUROP-live-speedband-tool/refs/heads/main/data/viable_markers.json").then((res) => res.json().then(obj => {
-      setSpeedbands(Speedband.JsonToSpeedbands(obj));
+      setSpeedbands(Speedband.jsonToSpeedbands(obj));
     }));
   }, [])
 
@@ -28,8 +28,13 @@ export default function Home() {
     <>
       <NavBar></NavBar>
       <div className={styles.pageContent}>
-        <SpeedbandList></SpeedbandList>
-        <Map position={[1.28960592759792, 103.84835955306676]} zoom={12} className={styles.mapContainer} speedbands={speedbands} />
+        <SpeedbandList speedbands={speedbands}></SpeedbandList>
+        <Map
+          position={[1.28960592759792, 103.84835955306676]}
+          zoom={12}
+          className={styles.mapContainer}
+          speedbands={speedbands}>
+        </Map>
       </div>
     </>
   );

@@ -1,28 +1,20 @@
 import { Speedband } from "@/lib/speedband";
-import { useEffect, useState } from "react";
 import MapMarker from "./Marker";
 import MapPath from "./Path";
-import { LatLngExpression } from "leaflet";
 
 type SpeedbandProps = {
-  band: Speedband;
+  speedband: Speedband;
 }
 
-export default function SpeedbandAnnotation({ band }: SpeedbandProps) {
-  const [id, setId] = useState<LatLngExpression>();
-
-  useEffect(() => {
-    setId(band.start.coords);
-  }, [])
-
+export default function SpeedbandAnnotation({ speedband }: SpeedbandProps) {
   // Temporary for development
   const speedbandClicked = () => {
-    alert(`You clicked ${id}`);
+    alert(`You clicked ${speedband.id}`);
   }
 
   return (
     <>
-      {band.markers.map(marker => {
+      {speedband.markers.map(marker => {
         return <MapMarker
           onClick={speedbandClicked}
           marker={marker}
@@ -31,7 +23,7 @@ export default function SpeedbandAnnotation({ band }: SpeedbandProps) {
       })}
       <MapPath
         onClick={speedbandClicked}
-        path={band.path}
+        path={speedband.path}
         opacity={1}
       ></MapPath>
     </>
