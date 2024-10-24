@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import SpeedbandList from "./components/SpeedbandList";
 import { Speedband } from "./lib/speedband";
 import styles from "./page.module.css";
+import { LatLng } from "leaflet";
 
 export default function Home() {
   const Map = useMemo(() => dynamic(
@@ -30,7 +31,7 @@ export default function Home() {
       <div className={styles.pageContent}>
         <SpeedbandList speedbands={speedbands}></SpeedbandList>
         <Map
-          position={[1.28960592759792, 103.84835955306676]}
+          position={new LatLng(1.28960592759792, 103.84835955306676)}
           zoom={12}
           className={styles.mapContainer}
           speedbands={speedbands}>

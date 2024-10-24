@@ -7,6 +7,8 @@ type SpeedbandProps = {
 }
 
 export default function SpeedbandAnnotation({ speedband }: SpeedbandProps) {
+  const DEFAULT_OPACITY = 0.5;
+
   // Temporary for development
   const speedbandClicked = () => {
     alert(`You clicked ${speedband.id}`);
@@ -18,13 +20,13 @@ export default function SpeedbandAnnotation({ speedband }: SpeedbandProps) {
         return <MapMarker
           onClick={speedbandClicked}
           marker={marker}
-          opacity={1}
+          opacity={DEFAULT_OPACITY}
         ></MapMarker>
       })}
       <MapPath
         onClick={speedbandClicked}
         path={speedband.path}
-        opacity={1}
+        opacity={DEFAULT_OPACITY}
       ></MapPath>
     </>
   )

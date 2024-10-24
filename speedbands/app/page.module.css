@@ -11,7 +11,15 @@
 .speedbandList {
   width: 25vw;
   height: 90vh;
-  padding-left: 1em;
+  overflow-y: scroll;
+}
+
+.speedbandList tr > *:hover {
+  cursor: pointer;
+}
+
+.speedbandList tr:nth-child(even) {
+  background-color: var(--background-lighter);
 }
 
 .navBar {
@@ -24,4 +32,14 @@
 .navBar h1 {
   margin: 0;
   padding-left: 1em;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.speedbandList input[type="checkbox"] {
+  padding: 0;
 }

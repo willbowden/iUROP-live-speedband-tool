@@ -1,12 +1,17 @@
 import { Speedband } from "@/lib/speedband";
 import styles from "@/page.module.css";
 import SpeedbandListItem from "./SpeedbandListItem";
+import { LatLng } from "leaflet";
 
 type SpeedbandListProps = {
   speedbands: Array<Speedband>;
 }
 
 export default function SpeedbandList({ speedbands }: SpeedbandListProps) {
+  const listItemClicked = (id: LatLng, selectedStatus: boolean) => {
+    return !selectedStatus;
+  }
+
   return (
     <div className={styles.speedbandList}>
       <table>
@@ -19,8 +24,8 @@ export default function SpeedbandList({ speedbands }: SpeedbandListProps) {
           {speedbands.map(band => {
             return (
               <SpeedbandListItem
+                listItemClicked={listItemClicked}
                 speedband={band}>
-
               </SpeedbandListItem>
             )
           })}
