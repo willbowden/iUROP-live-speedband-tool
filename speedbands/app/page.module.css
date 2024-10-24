@@ -41,5 +41,11 @@
 }
 
 .speedbandList input[type="checkbox"] {
-  padding: 0;
+  height: 1.5em;
+  width: 1.5em;
+  color: var(--background-darker);
+}
+
+.speedbandList input[type="checkbox"]:hover {
+  cursor: pointer;
 }

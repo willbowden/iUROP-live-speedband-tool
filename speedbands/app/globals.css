@@ -1,7 +1,8 @@
 :root {
   --foreground: #ffffff;
   --background: #171717;
-  --background-lighter: #212121
+  --background-lighter: #212121;
+  --background-darker: #151515;
 }
 
 html, body {
