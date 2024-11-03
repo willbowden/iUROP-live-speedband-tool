@@ -1,12 +1,14 @@
 "use client"
 
+import { LatLng } from "leaflet";
 import dynamic from "next/dynamic";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import NavBar from "./components/NavBar";
 import SpeedbandList from "./components/SpeedbandList";
+import { getSpeedbands, setSpeedbands } from "./lib/features/speedbands/speedbandSlice";
+import { useAppDispatch, useAppSelector } from "./lib/hooks";
 import { Speedband } from "./lib/speedband";
 import styles from "./page.module.css";
-import { LatLng } from "leaflet";
 
 export default function Home() {
   const Map = useMemo(() => dynamic(
@@ -17,11 +19,12 @@ export default function Home() {
     }
   ), [])
 
-  const [speedbands, setSpeedbands] = useState<Array<Speedband>>([])
+  const speedbands = useAppSelector(getSpeedbands);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     fetch("https://raw.githubusercontent.com/willbowden/iUROP-live-speedband-tool/refs/heads/main/data/viable_markers.json").then((res) => res.json().then(obj => {
-      setSpeedbands(Speedband.jsonToSpeedbands(obj));
+      dispatch(setSpeedbands(Speedband.jsonToSpeedbands(obj)));
     }));
   }, [])
 

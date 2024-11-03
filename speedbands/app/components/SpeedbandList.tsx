@@ -15,12 +15,12 @@ export default function SpeedbandList({ speedbands }: SpeedbandListProps) {
   return (
     <div className={styles.speedbandList}>
       <table>
-        <thead>
-          <th>Selected</th>
-          <th>Coords</th>
-          <th>Road</th>
-        </thead>
         <tbody>
+          <tr>
+            <th>Selected</th>
+            <th>Coords</th>
+            <th>Road</th>
+          </tr>
           {speedbands.map(band => {
             return (
               <SpeedbandListItem

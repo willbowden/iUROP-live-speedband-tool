@@ -1,8 +1,11 @@
 import { Action, configureStore, createAsyncThunk, ThunkAction } from '@reduxjs/toolkit'
+import speedbandReducer from "./features/speedbands/speedbandSlice";
 
 export const makeStore = () => {
   return configureStore({
-    reducer: {}
+    reducer: {
+      speedband: speedbandReducer,
+    }
   })
 }
 
