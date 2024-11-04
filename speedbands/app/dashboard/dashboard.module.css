@@ -1,0 +1,14 @@
+.pageContent {
+  width: 100vw;
+  display: flex;
+}
+
+.mapContainer {
+  width: 75vw;
+  height: 90vh;
+}
+
+.sideMenu {
+  width: 25vw;
+  height: 90vh;
+}

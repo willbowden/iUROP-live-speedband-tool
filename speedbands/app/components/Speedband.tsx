@@ -1,6 +1,6 @@
 import { Speedband } from "@/lib/speedband";
-import MapMarker from "./Marker";
-import MapPath from "./Path";
+import MapMarker from "@/components/Marker";
+import MapPath from "@/components/Path";
 
 type SpeedbandProps = {
   speedband: Speedband;

@@ -4,7 +4,7 @@ import "leaflet-defaulticon-compatibility"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 import "leaflet/dist/leaflet.css"
 import { MapContainer, TileLayer } from "react-leaflet"
-import SpeedbandAnnotation from "./Speedband"
+import SpeedbandAnnotation from "@/components/Speedband";
 import { Speedband } from "@/lib/speedband"
 import { LatLng } from "leaflet"
 

@@ -1,7 +1,7 @@
 import { Speedband } from "@/lib/speedband";
-import styles from "@/page.module.css";
 import SpeedbandListItem from "./SpeedbandListItem";
 import { LatLng } from "leaflet";
+import styles from "./SpeedbandList.module.css";
 
 type SpeedbandListProps = {
   speedbands: Array<Speedband>;

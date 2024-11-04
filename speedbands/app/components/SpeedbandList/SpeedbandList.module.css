@@ -1,37 +1,13 @@
-.pageContent {
-  width: 100vw;
-  display: flex;
-}
-
-.mapContainer {
-  width: 75vw;
-  height: 90vh;
-}
-
 .speedbandList {
-  width: 25vw;
-  height: 90vh;
   overflow-y: scroll;
 }
 
-.speedbandList tr > *:hover {
+.speedbandList tr>*:hover {
   cursor: pointer;
 }
 
 .speedbandList tr:nth-child(even) {
   background-color: var(--background-lighter);
-}
-
-.navBar {
-  width: 100vw;
-  height: 10vh;
-  display: flex;
-  align-items: center;
-}
-
-.navBar h1 {
-  margin: 0;
-  padding-left: 1em;
 }
 
 .checkboxContainer {
