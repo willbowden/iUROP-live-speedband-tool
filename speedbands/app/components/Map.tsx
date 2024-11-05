@@ -15,9 +15,15 @@ type MapProps = {
   speedbands: Array<Speedband>;
 }
 
+// Leaflet Map Container needs an absolute width and height to display properly.
+const mapContainerStyle: React.CSSProperties = {
+  width: "75vw",
+  height: "90vh",
+}
+
 export default function Map({position, zoom, className, speedbands}: MapProps) {
 
-  return <MapContainer center={position} zoom={zoom} scrollWheelZoom={true} className={className}>
+  return <MapContainer center={position} zoom={zoom} scrollWheelZoom={true} style={mapContainerStyle}>
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

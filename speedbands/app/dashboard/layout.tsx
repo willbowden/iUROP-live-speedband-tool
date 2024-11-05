@@ -1,11 +1,24 @@
 "use client"
 
-import NavBar from "@/components/NavBar/NavBar";
 import { Speedband } from "@/lib/speedband";
 import dynamic from "next/dynamic";
-import { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./dashboard.module.css"
 import { LatLng } from "leaflet";
+import { Layout } from "antd";
+import Sider from "antd/es/layout/Sider";
+import { Content } from "antd/es/layout/layout";
+
+const dashboardStyle: React.CSSProperties = {
+  width: "100vw",
+  display: "flex",
+}
+
+const sideMenuStyle: React.CSSProperties = {
+  height: "90vh",
+  paddingLeft: "2em",
+  paddingRight: "2em",
+}
 
 export default function DashboardLayout({
   children,
@@ -30,17 +43,16 @@ export default function DashboardLayout({
   }, [])
 
   return (
-    <>
-      <NavBar></NavBar>
-      <div className={styles.pageContent}>
-        <div className={styles.sideMenu}>{children}</div>
-        <Map
-          position={new LatLng(1.28960592759792, 103.84835955306676)}
-          zoom={12}
-          className={styles.mapContainer}
-          speedbands={speedbands}>
-        </Map>
-      </div>
-    </>
+    <Layout style={dashboardStyle}>
+      <Sider width="25%" style={sideMenuStyle}>
+        {children}
+      </Sider>
+      <Map
+        position={new LatLng(1.28960592759792, 103.84835955306676)}
+        zoom={12}
+        className={styles.mapContainer}
+        speedbands={speedbands}>
+      </Map>
+    </Layout>
   )
 }
