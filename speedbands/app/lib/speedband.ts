@@ -1,4 +1,4 @@
-import { stringToCoords } from "@/util/stringCoordsToLatLng";
+import { prettyCoords, stringToCoords } from "@/util/stringCoordsToLatLng";
 import { LatLng } from "leaflet";
 
 export interface MarkerJson {
@@ -77,5 +77,13 @@ export class Speedband {
 
   get markers() {
     return [this.start, this.end, this.camera];
+  }
+
+  get prettyCoords() {
+    return prettyCoords(this.id);
+  }
+
+  get streetName() {
+    return this.path.label;
   }
 }
