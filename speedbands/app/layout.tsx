@@ -1,8 +1,8 @@
+import NavBar from "@/components/NavBar/NavBar";
 import "@/globals.css";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import localFont from "next/font/local";
 import ThemeProvider from "./components/ThemeProvider";
-import NavBar from "@/components/NavBar/NavBar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

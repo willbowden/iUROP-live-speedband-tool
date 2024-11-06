@@ -1,13 +1,11 @@
 "use client"
 
-import { Speedband } from "@/lib/speedband";
-import dynamic from "next/dynamic";
-import React, { useEffect, useMemo, useState } from "react";
-import styles from "./dashboard.module.css"
-import { LatLng } from "leaflet";
+import { initialSpeedbandState, SpeedbandContext, SpeedbandDispatchContext, speedbandReducer } from "@/lib/SpeedbandContext";
 import { Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
-import { Content } from "antd/es/layout/layout";
+import { LatLng } from "leaflet";
+import dynamic from "next/dynamic";
+import React, { useEffect, useMemo, useReducer } from "react";
 
 const dashboardStyle: React.CSSProperties = {
   width: "100vw",
@@ -33,26 +31,32 @@ export default function DashboardLayout({
     }
   ), [])
 
-  const [speedbands, setSpeedbands] = useState<Array<Speedband>>([]);
-  // const dispatch = useAppDispatch();
+  const [speedbandState, dispatch] = useReducer(speedbandReducer, initialSpeedbandState);
 
   useEffect(() => {
-    fetch("https://raw.githubusercontent.com/willbowden/iUROP-live-speedband-tool/refs/heads/main/data/viable_markers.json").then((res) => res.json().then(obj => {
-      setSpeedbands(Speedband.jsonToSpeedbands(obj));
-    }));
+    if (speedbandState.status === 'pending') {
+      fetch("https://raw.githubusercontent.com/willbowden/iUROP-live-speedband-tool/refs/heads/main/data/viable_markers.json").then((res) => res.json().then(obj => {
+        dispatch({
+          type: 'Success',
+          speedbands: obj,
+        })
+      }));
+    }
   }, [])
 
   return (
-    <Layout style={dashboardStyle}>
-      <Sider width="25%" style={sideMenuStyle}>
-        {children}
-      </Sider>
-      <Map
-        position={new LatLng(1.28960592759792, 103.84835955306676)}
-        zoom={12}
-        className={styles.mapContainer}
-        speedbands={speedbands}>
-      </Map>
-    </Layout>
+    <SpeedbandContext.Provider value={speedbandState}>
+      <SpeedbandDispatchContext.Provider value={dispatch}>
+        <Layout style={dashboardStyle}>
+          <Sider width="25%" style={sideMenuStyle}>
+            {children}
+          </Sider>
+          <Map
+            position={new LatLng(1.28960592759792, 103.84835955306676)}
+            zoom={12}>
+          </Map>
+        </Layout>
+      </SpeedbandDispatchContext.Provider>
+    </SpeedbandContext.Provider>
   )
 }
