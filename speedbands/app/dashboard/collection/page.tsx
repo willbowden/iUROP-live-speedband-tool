@@ -2,16 +2,17 @@
 
 import { Speedband } from "@/lib/speedband";
 import { DownOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Flex, Input, MenuProps, Select, Space, Table, TableColumnsType, TableProps, Typography } from "antd";
+import { Button, Dropdown, Flex, Input, MenuProps, Select, Slider, SliderSingleProps, Space, Table, TableColumnsType, TableProps, Typography } from "antd";
 import React, { useState } from "react";
 
 const { Title } = Typography;
 
 const titleStyle: React.CSSProperties = {
   marginTop: "0.5em",
+  marginBottom: "0.5em",
 };
 
-const dropdownStyle: React.CSSProperties = {
+const sliderStyle: React.CSSProperties = {
   width: "100%",
 };
 
@@ -24,43 +25,19 @@ const buttonStyle: React.CSSProperties = {
   alignSelf: "flex-end",
 }
 
-const durationOptions = [
-  {
-    label: "1 minute",
-    value: 1,
-  },
-  {
-    label: "5 minutes",
-    value: 5,
-  },
-  {
-    label: "10 minutes",
-    value: 10,
-  },
-  {
-    label: "15 minutes",
-    value: 15,
-  },
-  {
-    label: "30 minutes",
-    value: 30,
-  }
-];
+const durationOptions: SliderSingleProps['marks'] = {
+  1: '1 min',
+  5: '5 mins',
+  10: '10 mins',
+  15: '15 mins',
+  30: '30 mins',
+};
 
-const frequencyOptions = [
-  {
-    label: "5 minutes",
-    value: 5,
-  },
-  {
-    label: "10 minutes",
-    value: 10,
-  },
-  {
-    label: "15 minutes",
-    value: 15,
-  },
-];
+const frequencyOptions: SliderSingleProps['marks'] = {
+  5: '5 mins',
+  10: '10 mins',
+  15: '15 mins',
+};
 
 const columns: TableColumnsType<Speedband> = [
   {
@@ -97,15 +74,38 @@ export default function StartJob() {
         onChange={(e) => setApiKey(e.target.value)}
         type="password"></Input>
 
-      <Select
-        placeholder={"Select Job Duration"}
-        style={dropdownStyle}
-        options={durationOptions} />
+      <Title
+        level={5}
+        style={titleStyle}
+      >Job Duration</Title>
 
-      <Select
-        placeholder={"Select Sample Frequency"}
-        style={dropdownStyle}
-        options={frequencyOptions} />
+      <Slider
+        min={1}
+        max={30}
+        marks={durationOptions}
+        step={null}
+        defaultValue={15}
+        style={sliderStyle}
+      ></Slider>
+
+      <Title
+        level={5}
+        style={titleStyle}
+      >Sample Frequency</Title>
+
+      <Slider
+        min={5}
+        max={15}
+        marks={frequencyOptions}
+        step={null}
+        defaultValue={5}
+        style={sliderStyle}
+      ></Slider>
+
+      <Title
+        level={5}
+        style={titleStyle}
+      >Speedband Selection</Title>
 
       <Table<Speedband>
         rowSelection={{ type: "checkbox", ...rowSelection }}
