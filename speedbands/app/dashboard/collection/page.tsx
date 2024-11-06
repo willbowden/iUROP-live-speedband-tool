@@ -1,8 +1,7 @@
 "use client"
 
 import { Speedband } from "@/lib/speedband";
-import { DownOutlined } from "@ant-design/icons";
-import { Button, Dropdown, Flex, Input, MenuProps, Select, Slider, SliderSingleProps, Space, Table, TableColumnsType, TableProps, Typography } from "antd";
+import { Button, Flex, Input, Slider, SliderSingleProps, Table, TableColumnsType, TableProps, Typography } from "antd";
 import React, { useState } from "react";
 
 const { Title } = Typography;

@@ -1,5 +1,4 @@
 import "@/globals.css";
-import StoreProvider from "@/lib/StoreProvider";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import localFont from "next/font/local";
 import ThemeProvider from "./components/ThemeProvider";
@@ -22,17 +21,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable}`}>
-          <AntdRegistry>
-            <ThemeProvider>
-              <NavBar></NavBar>
-              {children}
-            </ThemeProvider>
-          </AntdRegistry>
-        </body>
-      </html>
-    </StoreProvider>
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+        <AntdRegistry>
+          <ThemeProvider>
+            <NavBar></NavBar>
+            {children}
+          </ThemeProvider>
+        </AntdRegistry>
+      </body>
+    </html>
   );
 }
