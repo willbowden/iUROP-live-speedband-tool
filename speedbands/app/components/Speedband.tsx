@@ -1,6 +1,7 @@
 import { Speedband } from "@/lib/speedband";
 import MapMarker from "@/components/Marker";
 import MapPath from "@/components/Path";
+import { publish } from "@/lib/events";
 
 type SpeedbandProps = {
   speedband: Speedband;
@@ -9,9 +10,8 @@ type SpeedbandProps = {
 export default function SpeedbandAnnotation({ speedband }: SpeedbandProps) {
   const DEFAULT_OPACITY = 0.5;
 
-  // Temporary for development
   const speedbandClicked = () => {
-    alert(`You clicked ${speedband.id}`);
+    publish("speedbandClicked", { band: speedband })
   }
 
   return (

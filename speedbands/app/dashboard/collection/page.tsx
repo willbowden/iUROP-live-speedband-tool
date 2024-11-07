@@ -1,8 +1,10 @@
 "use client"
 
+import { subscribe } from "@/lib/events";
 import { Speedband } from "@/lib/speedband";
+import { SpeedbandContext } from "@/lib/SpeedbandContext";
 import { Button, Flex, Input, Slider, SliderSingleProps, Table, TableColumnsType, TableProps, Typography } from "antd";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 const { Title } = Typography;
 
@@ -24,6 +26,11 @@ const buttonStyle: React.CSSProperties = {
   alignSelf: "flex-end",
 }
 
+const menuStyle: React.CSSProperties = {
+  height: "100%",
+  paddingBottom: "1em",
+}
+
 const durationOptions: SliderSingleProps['marks'] = {
   1: '1 min',
   5: '5 mins',
@@ -41,78 +48,102 @@ const frequencyOptions: SliderSingleProps['marks'] = {
 const columns: TableColumnsType<Speedband> = [
   {
     title: "Coordinates",
-    dataIndex: "prettyCoords"
+    dataIndex: "prettyCoords",
   },
   {
     title: "Street Name",
-    dataIndex: "streetName"
+    dataIndex: "streetName",
   }
 ]
 
-const rowSelection: TableProps<Speedband>['rowSelection'] = {
-  onChange: (selectedRowKeys: React.Key[], selectedRows: Speedband[]) => {
-    console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-  },
-  getCheckboxProps: (record: Speedband) => ({
-    name: record.streetName,
-  }),
-};
-
 export default function StartJob() {
   const [apiKey, setApiKey] = useState<string>();
+  const [duration, setDuration] = useState<number>(15);
+  const [frequency, setFrequency] = useState<number>(5);
+  const [selectedSpeedbandIds, setSelectedSpeedbandIds] = useState<string[]>([]);
+
+  const { speedbands } = useContext(SpeedbandContext);
+
+  useEffect(() => {
+    subscribe("speedbandClicked", (event) => {
+      let item = (event as CustomEvent).detail.band.id;
+      item = `${item}`;
+      console.log(`Toggling ${item}`);
+      const newArray = selectedSpeedbandIds.includes(item) ? selectedSpeedbandIds.filter(i => i !== item) : [...selectedSpeedbandIds, item];
+      console.log(newArray);
+      setSelectedSpeedbandIds(newArray);
+    })
+  }, [])
+
+  const rowSelection: TableProps<Speedband>['rowSelection'] = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: Speedband[]) => {
+      setSelectedSpeedbandIds(selectedRowKeys as string[]);
+    },
+    getCheckboxProps: (record: Speedband) => ({
+      name: record.streetName,
+    }),
+    selectedRowKeys: selectedSpeedbandIds,
+  };
 
   return (
-    <Flex vertical align="flex-start" gap="1em">
-      <Title
-        level={4}
-        style={titleStyle}
-      >Start New Collection Job</Title>
+    <Flex vertical justify="space-between" style={menuStyle}>
+      <Flex vertical align="flex-start" gap="0.5em">
+        <Title
+          level={4}
+          style={titleStyle}
+        >Start New Collection Job</Title>
 
-      <Input
-        placeholder="Your LTA API Key"
-        onChange={(e) => setApiKey(e.target.value)}
-        type="password"></Input>
+        <Input
+          placeholder="Your LTA API Key"
+          onChange={(e) => setApiKey(e.target.value)}
+          type="password"></Input>
 
-      <Title
-        level={5}
-        style={titleStyle}
-      >Job Duration</Title>
+        <Title
+          level={5}
+          style={titleStyle}
+        >Job Duration</Title>
 
-      <Slider
-        min={1}
-        max={30}
-        marks={durationOptions}
-        step={null}
-        defaultValue={15}
-        style={sliderStyle}
-      ></Slider>
+        <Slider
+          min={1}
+          max={30}
+          marks={durationOptions}
+          step={null}
+          defaultValue={15}
+          style={sliderStyle}
+          onChange={(value) => setDuration(value)}
+        ></Slider>
 
-      <Title
-        level={5}
-        style={titleStyle}
-      >Sample Frequency</Title>
+        <Title
+          level={5}
+          style={titleStyle}
+        >Sample Frequency</Title>
 
-      <Slider
-        min={5}
-        max={15}
-        marks={frequencyOptions}
-        step={null}
-        defaultValue={5}
-        style={sliderStyle}
-      ></Slider>
+        <Slider
+          min={5}
+          max={15}
+          marks={frequencyOptions}
+          step={null}
+          defaultValue={5}
+          style={sliderStyle}
+          onChange={(value) => setFrequency(value)}
+        ></Slider>
 
-      <Title
-        level={5}
-        style={titleStyle}
-      >Speedband Selection</Title>
+        <Title
+          level={5}
+          style={titleStyle}
+        >Speedband Selection</Title>
 
-      <Table<Speedband>
-        rowSelection={{ type: "checkbox", ...rowSelection }}
-        columns={columns}
-        dataSource={[]}
-        sticky
-        style={tableStyle}
-      />
+        <Table<Speedband>
+          rowSelection={{ type: "checkbox", ...rowSelection }}
+          columns={columns}
+          dataSource={speedbands}
+          rowKey={(band) => `${band.id}`}
+          sticky
+          pagination={false}
+          style={tableStyle}
+          scroll={{ y: "26em" }}
+        />
+      </Flex>
 
       <Button
         type="primary"
