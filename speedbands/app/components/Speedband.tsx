@@ -18,6 +18,7 @@ export default function SpeedbandAnnotation({ speedband }: SpeedbandProps) {
     <>
       {speedband.markers.map(marker => {
         return <MapMarker
+          key={`${marker.coords}`}
           onClick={speedbandClicked}
           marker={marker}
           opacity={DEFAULT_OPACITY}

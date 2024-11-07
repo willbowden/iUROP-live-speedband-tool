@@ -1,5 +1,6 @@
 "use client"
 
+import { Speedband } from "@/lib/speedband";
 import { initialSpeedbandState, SpeedbandContext, SpeedbandDispatchContext, speedbandReducer } from "@/lib/SpeedbandContext";
 import { Layout } from "antd";
 import Sider from "antd/es/layout/Sider";
@@ -38,7 +39,7 @@ export default function DashboardLayout({
       fetch("https://raw.githubusercontent.com/willbowden/iUROP-live-speedband-tool/refs/heads/main/data/viable_markers.json").then((res) => res.json().then(obj => {
         dispatch({
           type: 'Success',
-          speedbands: obj,
+          speedbands: Speedband.jsonToSpeedbands(obj),
         })
       }));
     }

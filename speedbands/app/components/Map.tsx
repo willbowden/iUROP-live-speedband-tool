@@ -1,14 +1,13 @@
 "use client"
 
+import SpeedbandAnnotation from "@/components/Speedband"
+import { SpeedbandContext } from "@/lib/SpeedbandContext"
+import { LatLng } from "leaflet"
 import "leaflet-defaulticon-compatibility"
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css"
 import "leaflet/dist/leaflet.css"
-import { MapContainer, TileLayer } from "react-leaflet"
-import SpeedbandAnnotation from "@/components/Speedband";
-import { Speedband } from "@/lib/speedband"
-import { LatLng } from "leaflet"
 import { useContext } from "react"
-import { SpeedbandContext } from "@/lib/SpeedbandContext"
+import { MapContainer, TileLayer } from "react-leaflet"
 
 type MapProps = {
   position: LatLng;
@@ -31,6 +30,7 @@ export default function Map({position, zoom}: MapProps) {
     />
     {(status === 'idle') && speedbands.map(band => {
       return <SpeedbandAnnotation
+        key={`${band.id}`}
         speedband={band}>
       </SpeedbandAnnotation>
     })}

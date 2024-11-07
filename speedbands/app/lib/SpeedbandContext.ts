@@ -23,7 +23,6 @@ export const SpeedbandContext = createContext<SpeedbandState>(initialSpeedbandSt
 export const SpeedbandDispatchContext = createContext<Dispatch<SpeedbandActionType>>((_) => { });
 
 export function speedbandReducer(state: SpeedbandState, action: SpeedbandActionType): SpeedbandState {
-  console.log(`DISPATCH RECEIVED ${action.speedbands}`)
   switch (action.type) {
     case 'Success': {
       return {
