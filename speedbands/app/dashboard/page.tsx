@@ -18,13 +18,13 @@ export default function DashboardStart() {
         type="primary"
         style={buttonStyle}
         onClick={() => { router.push(`${pathname}/collection`) }}
-      >Collect New Data</Button>
-      <Button
+      >Start Collection Job</Button>
+      {/* <Button
         type="primary"
         style={buttonStyle}
         disabled
         onClick={() => { router.push(`${pathname}/detection`) }}
-      >Detect Vehicles</Button>
+      >Detect Vehicles</Button> */}
     </Flex>
   );
 }

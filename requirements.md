@@ -12,6 +12,8 @@
 - CREATE A FIGMA DESIGN FOR FRANCICSO.
 - Set maximum duration to 30 mins
 - Design collection scripts to allow for errors to prevent failure/crashing if posible.
+- USER AUTHENTICATION for submitting jobs otherwise people can waste our credits.
+- See if we can host the React app in the Github pages
 
 # Steps
 1. Collect data for speedbands.

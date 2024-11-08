@@ -3,6 +3,7 @@
 import { Speedband } from "@/lib/speedband";
 import { SpeedbandContext, SpeedbandDispatchContext } from "@/lib/SpeedbandContext";
 import { Button, Flex, Input, Slider, SliderSingleProps, Table, TableColumnsType, TableProps, Typography } from "antd";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 
 const { Title } = Typography;
@@ -59,6 +60,9 @@ export default function StartCollection() {
   const [apiKey, setApiKey] = useState<string>();
   const [duration, setDuration] = useState<number>(15);
   const [frequency, setFrequency] = useState<number>(5);
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   const { speedbands, selectedSpeedbands } = useContext(SpeedbandContext);
   const dispatch = useContext(SpeedbandDispatchContext);
@@ -139,6 +143,9 @@ export default function StartCollection() {
       <Button
         type="primary"
         style={buttonStyle}
+        onClick={() => {
+          router.push(`${pathname}/in_progress`)
+        }}
       >Start Job</Button>
     </Flex>
   )
