@@ -55,7 +55,7 @@ const columns: TableColumnsType<Speedband> = [
   }
 ]
 
-export default function StartJob() {
+export default function StartCollection() {
   const [apiKey, setApiKey] = useState<string>();
   const [duration, setDuration] = useState<number>(15);
   const [frequency, setFrequency] = useState<number>(5);
