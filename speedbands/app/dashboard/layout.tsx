@@ -38,7 +38,7 @@ export default function DashboardLayout({
     if (speedbandState.status === 'pending') {
       fetch("https://raw.githubusercontent.com/willbowden/iUROP-live-speedband-tool/refs/heads/main/data/viable_markers.json").then((res) => res.json().then(obj => {
         dispatch({
-          type: 'Success',
+          type: 'SpeedbandsAdded',
           speedbands: Speedband.jsonToSpeedbands(obj),
         })
       }));

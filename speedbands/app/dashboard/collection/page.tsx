@@ -1,10 +1,9 @@
 "use client"
 
-import { subscribe } from "@/lib/events";
 import { Speedband } from "@/lib/speedband";
-import { SpeedbandContext } from "@/lib/SpeedbandContext";
+import { SpeedbandContext, SpeedbandDispatchContext } from "@/lib/SpeedbandContext";
 import { Button, Flex, Input, Slider, SliderSingleProps, Table, TableColumnsType, TableProps, Typography } from "antd";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 const { Title } = Typography;
 
@@ -60,29 +59,21 @@ export default function StartJob() {
   const [apiKey, setApiKey] = useState<string>();
   const [duration, setDuration] = useState<number>(15);
   const [frequency, setFrequency] = useState<number>(5);
-  const [selectedSpeedbandIds, setSelectedSpeedbandIds] = useState<string[]>([]);
 
-  const { speedbands } = useContext(SpeedbandContext);
-
-  useEffect(() => {
-    subscribe("speedbandClicked", (event) => {
-      let item = (event as CustomEvent).detail.band.id;
-      item = `${item}`;
-      console.log(`Toggling ${item}`);
-      const newArray = selectedSpeedbandIds.includes(item) ? selectedSpeedbandIds.filter(i => i !== item) : [...selectedSpeedbandIds, item];
-      console.log(newArray);
-      setSelectedSpeedbandIds(newArray);
-    })
-  }, [])
+  const { speedbands, selectedSpeedbands } = useContext(SpeedbandContext);
+  const dispatch = useContext(SpeedbandDispatchContext);
 
   const rowSelection: TableProps<Speedband>['rowSelection'] = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: Speedband[]) => {
-      setSelectedSpeedbandIds(selectedRowKeys as string[]);
+      dispatch({
+        type: 'SetSelectedSpeedbands',
+        speedbands: selectedRows,
+      })
     },
     getCheckboxProps: (record: Speedband) => ({
       name: record.streetName,
     }),
-    selectedRowKeys: selectedSpeedbandIds,
+    selectedRowKeys: selectedSpeedbands.map(b => `${b.id}`),
   };
 
   return (
