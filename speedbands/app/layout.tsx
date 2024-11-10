@@ -1,6 +1,7 @@
 import NavBar from "@/components/NavBar/NavBar";
 import "@/globals.css";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { Flex } from "antd";
 import localFont from "next/font/local";
 import ThemeProvider from "./components/ThemeProvider";
 
@@ -26,7 +27,9 @@ export default function RootLayout({
         <AntdRegistry>
           <ThemeProvider>
             <NavBar></NavBar>
-            {children}
+            <Flex style={{height: "90vh"}}>
+              {children}
+            </Flex>
           </ThemeProvider>
         </AntdRegistry>
       </body>
