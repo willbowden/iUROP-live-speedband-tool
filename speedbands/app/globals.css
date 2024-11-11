@@ -1,0 +1,15 @@
+:root {
+  --foreground: #ffffff;
+  --background: #171717;
+  --background-lighter: #212121;
+  --background-darker: #151515;
+}
+
+html, body {
+  box-sizing: border-box;
+  margin: 0;
+  overflow: hidden;
+  font-family: monospace;
+  color: var(--foreground);
+  background-color: var(--background);
+}
