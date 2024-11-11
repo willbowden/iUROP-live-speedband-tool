@@ -13,6 +13,7 @@
     "@ant-design/nextjs-registry": "^1.0.1",
     "@reduxjs/toolkit": "^2.3.0",
     "antd": "^5.21.6",
+    "aws-amplify": "^6.8.0",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "next": "14.2.15",
     "react": "^18.3.1",
@@ -20,10 +21,17 @@
     "react-leaflet": "^4.2.1"
   },
   "devDependencies": {
+    "@aws-amplify/backend": "^1.6.2",
+    "@aws-amplify/backend-cli": "^1.4.1",
     "@types/leaflet": "^1.9.13",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "typescript": "^5"
+    "aws-cdk": "^2.166.0",
+    "aws-cdk-lib": "^2.166.0",
+    "constructs": "^10.4.2",
+    "esbuild": "^0.24.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
   }
 }

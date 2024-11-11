@@ -4,6 +4,10 @@ import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { Flex } from "antd";
 import localFont from "next/font/local";
 import ThemeProvider from "./components/ThemeProvider";
+import { Amplify } from 'aws-amplify';
+import awsExports from '@/aws-exports';
+
+Amplify.configure({ ...awsExports });
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,7 +31,7 @@ export default function RootLayout({
         <AntdRegistry>
           <ThemeProvider>
             <NavBar></NavBar>
-            <Flex style={{height: "90vh"}}>
+            <Flex style={{ height: "90vh" }}>
               {children}
             </Flex>
           </ThemeProvider>

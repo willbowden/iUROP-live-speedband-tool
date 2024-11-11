@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-speedbands-dev-9dc60-authRole",
+      "UnauthRoleArn": "arn:aws:iam::110238212046:role/amplify-speedbands-dev-9dc60-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::110238212046:role/amplify-speedbands-dev-9dc60-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-speedbands-dev-9dc60-deployment",
+      "UnauthRoleName": "amplify-speedbands-dev-9dc60-unauthRole",
+      "StackName": "amplify-speedbands-dev-9dc60",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:110238212046:stack/amplify-speedbands-dev-9dc60/3b37f470-a02d-11ef-b8d2-0aaaa5e45faf",
+      "AmplifyAppId": "d2yngzwm2dcmcm"
+    },
+    "categories": {
+      "auth": {
+        "speedbands2ae28743": {}
+      }
+    }
+  }
+}
