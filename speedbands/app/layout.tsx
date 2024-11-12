@@ -5,9 +5,11 @@ import { Flex } from "antd";
 import localFont from "next/font/local";
 import ThemeProvider from "./components/ThemeProvider";
 import { Amplify } from 'aws-amplify';
-import awsExports from '@/aws-exports';
+import config from './amplifyconfiguration.json';
+import AuthProvider from "./components/AuthProvider";
+import '@aws-amplify/ui-react/styles.css';
 
-Amplify.configure({ ...awsExports });
+Amplify.configure(config);
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,14 +30,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <AntdRegistry>
-          <ThemeProvider>
-            <NavBar></NavBar>
-            <Flex style={{ height: "90vh" }}>
-              {children}
-            </Flex>
-          </ThemeProvider>
-        </AntdRegistry>
+        <AuthProvider>
+          <AntdRegistry>
+            <ThemeProvider>
+              <NavBar></NavBar>
+              <Flex style={{ height: "90vh" }}>
+                {children}
+              </Flex>
+            </ThemeProvider>
+          </AntdRegistry>
+        </AuthProvider>
       </body>
     </html>
   );
