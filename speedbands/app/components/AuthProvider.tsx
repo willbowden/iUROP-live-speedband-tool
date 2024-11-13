@@ -1,6 +1,10 @@
 "use client"
 
 import { Authenticator } from "@aws-amplify/ui-react";
+import { Amplify } from 'aws-amplify';
+import config from '@/aws-exports';
+
+Amplify.configure(config);
 
 export default function AuthProvider({
   children,
@@ -8,7 +12,8 @@ export default function AuthProvider({
   children: React.ReactNode;
 }>) {
   return (
-    <Authenticator>
+    <Authenticator
+      loginMechanism="email">
       {children}
     </Authenticator>
   )
