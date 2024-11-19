@@ -1,10 +1,8 @@
 {
   "version": "1",
   "cognitoConfig": {
-    "identityPoolName": "speedbands2ae28743_identitypool_2ae28743",
-    "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "speedb2ae28743",
-    "userPoolName": "speedbands2ae28743_userpool_2ae28743",
+    "resourceNameTruncated": "speedbf2790379",
+    "userPoolName": "speedbandsUserPool",
     "autoVerifiedAttributes": [
       "email"
     ],
@@ -14,7 +12,7 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Your verification code",
+    "emailVerificationSubject": "Speedband Tool Verification Code",
     "emailVerificationMessage": "Your verification code is {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 8,
@@ -24,22 +22,26 @@
     ],
     "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
-    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientRefreshTokenValidity": "30",
     "userpoolClientWriteAttributes": [
       "email"
     ],
     "userpoolClientReadAttributes": [
       "email"
     ],
-    "userpoolClientLambdaRole": "speedb2ae28743_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "speedbf2790379_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "2ae28743",
-    "resourceName": "speedbands2ae28743",
-    "authSelections": "identityPoolAndUserPool",
-    "useDefault": "default",
+    "sharedId": "f2790379",
+    "resourceName": "speedbandsAmplifyAuth",
+    "authSelections": "userPoolOnly",
+    "useDefault": "manual",
     "usernameAttributes": [
       "email"
     ],
+    "userPoolGroups": false,
+    "adminQueries": false,
+    "triggers": {},
+    "hostedUI": false,
     "userPoolGroupList": [],
     "serviceName": "Cognito",
     "usernameCaseSensitive": false,
