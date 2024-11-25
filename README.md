@@ -1,4 +1,18 @@
-# Live Speedband Tool
+# Live Speedband Tool <!-- omit from toc -->
+
+- [AWS Setup Instructions](#aws-setup-instructions)
+- [1. Installing AWS CLI](#1-installing-aws-cli)
+- [2. Setting Up VPC](#2-setting-up-vpc)
+  - [Creating Subnets](#creating-subnets)
+  - [Create a NAT Gateway](#create-a-nat-gateway)
+  - [Creating Route Tables](#creating-route-tables)
+- [3. Setting up AWS Amplify](#3-setting-up-aws-amplify)
+- [4. Install the AWS SAM CLI](#4-install-the-aws-sam-cli)
+- [5. Update the SAM YAML](#5-update-the-sam-yaml)
+  - [Finding IDs](#finding-ids)
+  - [Ammending the YAML](#ammending-the-yaml)
+  - [Deploying the resources](#deploying-the-resources)
+
 
 # AWS Setup Instructions
 
@@ -7,7 +21,26 @@ These instructions assume you already have the following:
 1. An AWS account created in your desired region.
 2. Are starting from a fresh AWS account with no existing changes.
 
-# 1. Setting Up VPC
+# 1. Installing AWS CLI
+
+1. Follow [these instructions](https://docs.amplify.aws/gen1/react/start/getting-started/installation/) to setup the Amplify CLI. This will also walk you through creating an access key. **Make sure you save your access key locally, as it will be used below.**
+2. After you've created an amplify-dev IAM user, add the `AWSCloudFormationFullAccess` permission to them, so you can deploy the cloud resources using SAM.
+3. Follow [these instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) to install the AWS CLI.
+4. When complete, run `aws configure`
+   1. Enter the access key and secret that you obtained in step 1
+   2. Choose your region name (e.g 'ap-southeast-1`)
+   3. Set output format to 'json'
+5. Test your configuration by running `aws sts get-caller-identity`
+   1. Your account information should be returned:
+    ```json
+    {
+      "UserId": "AIDAxxxxxxxxxxxxx",
+      "Account": "123456789012",
+      "Arn": "arn:aws:iam::123456789012:user/YourUserName"
+    }
+    ```
+
+# 2. Setting Up VPC
 
 In order for the Lambda functions to be able to talk to both DynamoDB and the internet, you need to set up some subnets, route tables and a NAT gateway in the VPC.
 
@@ -49,15 +82,9 @@ In order for the Lambda functions to be able to talk to both DynamoDB and the in
 11. Click "Save changes"
 12. Repeat steps 3 to 11, creating a second table named `lambda-rt-to-igw`,  assigning the new route's target to "Internet Gateway", and selecting the only available (default) option (`igw-xxxxxxx`)
 
-# 2. Setting up AWS Amplify
+# 3. Setting up AWS Amplify
 
 AWS Amplify is used to provide user authentication for the frontend. Below are the instructions to configure it.
-
-## Setting up the CLI
-
-1. Follow [these instructions](https://docs.amplify.aws/gen1/react/start/getting-started/installation/) to setup the Amplify CLI.
-
-## Setting up Amplify
 
 1. Under `/speedbands` in this repo, delete the `amplify` folder. We will create a new Amplify setup configured to you.
 2. In the `/speedbands` directory, run `amplify init` and use the following options:
@@ -73,7 +100,11 @@ AWS Amplify is used to provide user authentication for the frontend. Below are t
    2. You may use other authentication options if you desire, but you would need to change the frontend to accomodate it.
 4. Run `amplify push` which will build the necessary resources for auth in the cloud.
 
-# 3. Update the SAM YAML
+# 4. Install the AWS SAM CLI
+
+Follow [these instructions](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) to install the CLI on your machine.
+
+# 5. Update the SAM YAML
 
 The `template.yaml` file in this repo under `/backend` will allow you to deploy the necessary infrastructure to AWS with a few commands using AWS' Serverless Application Model. In order to configure it to work with your AWS account, however, we need to update a few fields.
 
@@ -93,7 +124,9 @@ The `template.yaml` file in this repo under `/backend` will allow you to deploy 
 
 ## Deploying the resources
 
-Run:
+First, ensure you have the same version of Python (3.10 at time of writing) as in the YAML file installed on your machine and in your PATH. The version can be seen after `Runtime:` in the Lambda function definitions.
+
+Then run:
 ```bash
 sam build
 sam deploy --guided
