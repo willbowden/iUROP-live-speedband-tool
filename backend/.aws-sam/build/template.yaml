@@ -1,9 +1,31 @@
 Transform: AWS::Serverless-2016-10-31
+Parameters:
+  TableAlreadyExists:
+    Type: String
+    AllowedValues:
+    - true
+    - false
+    Default: false
+  ResultsBucketAlreadyExists:
+    Type: String
+    AllowedValues:
+    - true
+    - false
+    Default: false
+Conditions:
+  CreateTable:
+    Fn::Equals:
+    - Ref: TableAlreadyExists
+    - false
+  CreateResultsBucket:
+    Fn::Equals:
+    - Ref: ResultsBucketAlreadyExists
+    - false
 Resources:
   SpeedbandsAPI:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: $default
+      StageName: default
       Cors:
         AllowMethods: '''GET,POST'''
         AllowHeaders: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'''
@@ -113,6 +135,7 @@ Resources:
       SamResourceId: DataCollectionLambda
   DataCollectionJobs:
     Type: AWS::DynamoDB::Table
+    Condition: CreateTable
     Properties:
       TableName: DataCollectionJobs
       AttributeDefinitions:
@@ -123,3 +146,14 @@ Resources:
         KeyType: HASH
       BillingMode: PAY_PER_REQUEST
     DeletionPolicy: Retain
+  DataCollectionResultsBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Condition: CreateResultsBucket
+    Properties:
+      BucketName: results
+      LifecycleConfiguration:
+        Rules:
+        - Id: ExpireOldResults
+          Status: Enabled
+          ExpirationInDays: 30

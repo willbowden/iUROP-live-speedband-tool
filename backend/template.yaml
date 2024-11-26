@@ -1,11 +1,29 @@
 Transform: AWS::Serverless-2016-10-31
 
+Parameters:
+  TableAlreadyExists:
+    Type: String
+    AllowedValues:
+      - true
+      - false
+    Default: false
+  ResultsBucketAlreadyExists:
+    Type: String
+    AllowedValues:
+      - true
+      - false
+    Default: false
+
+Conditions:
+  CreateTable: !Equals [!Ref TableAlreadyExists, false]
+  CreateResultsBucket: !Equals [!Ref ResultsBucketAlreadyExists, false]
+
 Resources:
   # API
   SpeedbandsAPI:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: $default
+      StageName: default
       Cors:
         AllowMethods: "'GET,POST'"
         AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
@@ -44,76 +62,75 @@ Resources:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
 
-  # Lambdas
   JobSchedulerLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: lambda_function.lambda_handler
-      Runtime: python3.10
-      CodeUri: ./lambdas/jobScheduler/
-      Role: !GetAtt JobSchedulerRole.Arn
-      Events:
-        CreateJob:
-          Type: Api
-          Properties:
-            RestApiId: !Ref SpeedbandsAPI
-            Path: /jobs/create
-            Method: POST
-      VpcConfig:
-        SubnetIds:
-          # REPLACE WITH YOUR OWN SUBNET IDS
-          - subnet-03f22d08a04b1627f # lambda-subnet-point-to-nat-1
-          - subnet-0b036e4ef099f6e24 # lambda-subnet-point-to-nat-2
-          - subnet-010c5679b46dbf897 # lambda-subnet-point-to-nat-3
-        SecurityGroupIds:
-          # REPLACE WITH YOUR OWN SG ID(S)
-          - sg-0c24ac90309044d8d # default security group
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: lambda_function.lambda_handler
+        Runtime: python3.10
+        CodeUri: ./lambdas/jobScheduler/
+        Role: !GetAtt JobSchedulerRole.Arn
+        Events:
+          CreateJob:
+            Type: Api
+            Properties:
+              RestApiId: !Ref SpeedbandsAPI
+              Path: /jobs/create
+              Method: POST
+        VpcConfig:
+          SubnetIds:
+            # REPLACE WITH YOUR OWN SUBNET IDS
+            - subnet-03f22d08a04b1627f # lambda-subnet-point-to-nat-1
+            - subnet-0b036e4ef099f6e24 # lambda-subnet-point-to-nat-2
+            - subnet-010c5679b46dbf897 # lambda-subnet-point-to-nat-3
+          SecurityGroupIds:
+            # REPLACE WITH YOUR OWN SG ID(S)
+            - sg-0c24ac90309044d8d # default security group
 
   JobCheckerLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: lambda_function.lambda_handler
-      Runtime: python3.10
-      CodeUri: ./lambdas/jobChecker/
-      Role: !GetAtt JobSchedulerRole.Arn
-      Events:
-        CheckJob:
-          Type: Api
-          Properties:
-            RestApiId: !Ref SpeedbandsAPI
-            Path: /jobs/check/{jobId}
-            Method: GET
-      VpcConfig:
-        SubnetIds:
-          # REPLACE WITH YOUR OWN SUBNET IDS
-          - subnet-03f22d08a04b1627f # lambda-subnet-point-to-nat-1
-          - subnet-0b036e4ef099f6e24 # lambda-subnet-point-to-nat-2
-          - subnet-010c5679b46dbf897 # lambda-subnet-point-to-nat-3
-        SecurityGroupIds:
-          # REPLACE WITH YOUR OWN SG ID(S)
-          - sg-0c24ac90309044d8d # default security group
-    
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: lambda_function.lambda_handler
+        Runtime: python3.10
+        CodeUri: ./lambdas/jobChecker/
+        Role: !GetAtt JobSchedulerRole.Arn
+        Events:
+          CheckJob:
+            Type: Api
+            Properties:
+              RestApiId: !Ref SpeedbandsAPI
+              Path: /jobs/check/{jobId}
+              Method: GET
+        VpcConfig:
+          SubnetIds:
+            # REPLACE WITH YOUR OWN SUBNET IDS
+            - subnet-03f22d08a04b1627f # lambda-subnet-point-to-nat-1
+            - subnet-0b036e4ef099f6e24 # lambda-subnet-point-to-nat-2
+            - subnet-010c5679b46dbf897 # lambda-subnet-point-to-nat-3
+          SecurityGroupIds:
+            # REPLACE WITH YOUR OWN SG ID(S)
+            - sg-0c24ac90309044d8d # default security group
 
   DataCollectionLambda:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: lambda_function.lambda_handler
-      Runtime: python3.10
-      CodeUri: ./lambdas/dataCollection/
-      Role: !GetAtt DataCollectionRole.Arn
-      VpcConfig:
-        SubnetIds:
-          # REPLACE WITH YOUR OWN SUBNET IDS
-          - subnet-03f22d08a04b1627f # lambda-subnet-point-to-nat-1
-          - subnet-0b036e4ef099f6e24 # lambda-subnet-point-to-nat-2
-          - subnet-010c5679b46dbf897 # lambda-subnet-point-to-nat-3
-        SecurityGroupIds:
-          # REPLACE WITH YOUR OWN SG ID(S)
-          - sg-0c24ac90309044d8d # default security group
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: lambda_function.lambda_handler
+        Runtime: python3.10
+        CodeUri: ./lambdas/dataCollection/
+        Role: !GetAtt DataCollectionRole.Arn
+        VpcConfig:
+          SubnetIds:
+            # REPLACE WITH YOUR OWN SUBNET IDS
+            - subnet-03f22d08a04b1627f # lambda-subnet-point-to-nat-1
+            - subnet-0b036e4ef099f6e24 # lambda-subnet-point-to-nat-2
+            - subnet-010c5679b46dbf897 # lambda-subnet-point-to-nat-3
+          SecurityGroupIds:
+            # REPLACE WITH YOUR OWN SG ID(S)
+            - sg-0c24ac90309044d8d # default security group
 
   # DynamoDB table
   DataCollectionJobs:
     Type: AWS::DynamoDB::Table
+    Condition: CreateTable
     Properties:
       TableName: DataCollectionJobs
       AttributeDefinitions:
@@ -124,6 +141,19 @@ Resources:
           KeyType: HASH
       BillingMode: PAY_PER_REQUEST
     DeletionPolicy: Retain
+
+  # S3 bucket for job results
+  DataCollectionResultsBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    Condition: CreateResultsBucket
+    Properties:
+      BucketName: "results"
+      LifecycleConfiguration:
+        Rules:
+          - Id: ExpireOldResults
+            Status: Enabled
+            ExpirationInDays: 30
 
 
   

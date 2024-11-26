@@ -6,6 +6,7 @@
   - [Creating Subnets](#creating-subnets)
   - [Create a NAT Gateway](#create-a-nat-gateway)
   - [Creating Route Tables](#creating-route-tables)
+  - [Assigning Subnets to Route Tables](#assigning-subnets-to-route-tables)
 - [3. Setting up AWS Amplify](#3-setting-up-aws-amplify)
 - [4. Install the AWS SAM CLI](#4-install-the-aws-sam-cli)
 - [5. Update the SAM YAML](#5-update-the-sam-yaml)
@@ -24,7 +25,8 @@ These instructions assume you already have the following:
 # 1. Installing AWS CLI
 
 1. Follow [these instructions](https://docs.amplify.aws/gen1/react/start/getting-started/installation/) to setup the Amplify CLI. This will also walk you through creating an access key. **Make sure you save your access key locally, as it will be used below.**
-2. After you've created an amplify-dev IAM user, add the `AWSCloudFormationFullAccess` permission to them, so you can deploy the cloud resources using SAM.
+2. After you've created an amplify-dev IAM user, add the `AdministratorAccess` permission to them, so you can deploy the cloud resources using SAM. 
+   > **Note**: `AdministratorAccess` is an all-encompassing policy that will allow you every permission. It is very unsecure to use this, so I highly reccommend you either add specific necessary policies, use user groups, or remove the `AdministratorAccess` policy once you've finished following these instructions.
 3. Follow [these instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) to install the AWS CLI.
 4. When complete, run `aws configure`
    1. Enter the access key and secret that you obtained in step 1
@@ -82,6 +84,17 @@ In order for the Lambda functions to be able to talk to both DynamoDB and the in
 11. Click "Save changes"
 12. Repeat steps 3 to 11, creating a second table named `lambda-rt-to-igw`,  assigning the new route's target to "Internet Gateway", and selecting the only available (default) option (`igw-xxxxxxx`)
 
+## Assigning Subnets to Route Tables
+
+1. On the AWS dashboard, navigate to VPC
+2. Navigate to "Subnets"
+3. Select `lambda-subnet-point-to-nat-1`
+4. Click "Actions"
+5. Click "Edit route table association"
+6. Under "Route Table ID", select "lambda-rt-to-nat"
+7. Click "Save"
+8. Repeat steps 3 to 7 for `lambda-subnet-point-to-nat-` 2 and 3.
+
 # 3. Setting up AWS Amplify
 
 AWS Amplify is used to provide user authentication for the frontend. Below are the instructions to configure it.
@@ -126,8 +139,19 @@ The `template.yaml` file in this repo under `/backend` will allow you to deploy 
 
 First, ensure you have the same version of Python (3.10 at time of writing) as in the YAML file installed on your machine and in your PATH. The version can be seen after `Runtime:` in the Lambda function definitions.
 
-Then run:
+If it's your first time doing this step, run:
 ```bash
 sam build
 sam deploy --guided
 ```
+
+If you've already built but for whatever reason need to do it again, run the following command if the DynamoDB table `DataCollectionJobs` already exists:
+
+```bash
+sam build
+sam deploy --parameter-overrides TableAlreadyExists=true ResultsBucketAlreadyExists=true
+```
+
+This is because the DynamoDB table and S3 bucket have `DeletionPolicy` set to `Retain` which means they aren't deleted in the event of a failure or re-deploy. This is so we don't lose the data inside them.
+
+If, for whatever reason, deployment fails, you will need to manually navigate to the AWS CloudFormation dashboard and delete the stack which is in state `ROLLBACK_COMPLETED` before you can deploy another stack with the same name.
