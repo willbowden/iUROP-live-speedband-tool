@@ -61,6 +61,7 @@ Resources:
         - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
         - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
         - arn:aws:iam::aws:policy/AmazonS3FullAccess
+        - arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess
 
   JobSchedulerLambda:
       Type: AWS::Serverless::Function
@@ -126,6 +127,15 @@ Resources:
           SecurityGroupIds:
             # REPLACE WITH YOUR OWN SG ID(S)
             - sg-0c24ac90309044d8d # default security group
+  
+  # To allow EventBridge to invoke our Data Collection Lambda
+  EventBridgeInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !GetAtt DataCollectionLambda.Arn
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn: !Sub "arn:aws:events:${AWS::Region}:${AWS::AccountId}:rule/*"
 
   # DynamoDB table
   DataCollectionJobs:

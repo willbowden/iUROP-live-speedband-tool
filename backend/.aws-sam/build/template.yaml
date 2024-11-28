@@ -60,6 +60,7 @@ Resources:
       - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
       - arn:aws:iam::aws:policy/AmazonS3FullAccess
+      - arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess
   JobSchedulerLambda:
     Type: AWS::Serverless::Function
     Properties:
@@ -133,6 +134,17 @@ Resources:
         - sg-0c24ac90309044d8d
     Metadata:
       SamResourceId: DataCollectionLambda
+  EventBridgeInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Fn::GetAtt:
+        - DataCollectionLambda
+        - Arn
+      Action: lambda:InvokeFunction
+      Principal: events.amazonaws.com
+      SourceArn:
+        Fn::Sub: arn:aws:events:${AWS::Region}:${AWS::AccountId}:rule/*
   DataCollectionJobs:
     Type: AWS::DynamoDB::Table
     Condition: CreateTable

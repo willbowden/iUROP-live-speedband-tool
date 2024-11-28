@@ -2,10 +2,11 @@
 
 import boto3
 import uuid
+import json
 from datetime import datetime, timedelta
 
 # Initialise AWS services
-dynamodb = boto3.client('dynamodb')
+dynamodb = boto3.resource('dynamodb')
 eventbridge = boto3.client('events')
 
 DYNAMO_TABLE = 'DataCollectionJobs'
@@ -47,18 +48,19 @@ def lambda_handler(event, context):
         job_id = str(uuid.uuid4())
         start_time = datetime.now()
         end_time = start_time + timedelta(minutes=duration)
+
+        table = dynamodb.Table(DYNAMO_TABLE)
         
         # Save job metadata in DynamoDB
-        response = dynamodb.put_item(
-            TableName=DYNAMO_TABLE,
+        response = table.put_item(
             Item={
-            'jobId': {'S': job_id},
-            'userId': {'S': user_id},
-            'status': {'S': 'Pending'},
-            'startTime': {'S': start_time.isoformat()},
-            'endTime': {'S': end_time.isoformat()},
-            'apiKey': {'S': api_key},
-            'frequencyMinutes': {'N': f"{frequency}"}
+            'jobId': job_id,
+            'userId': user_id,
+            'status': 'Pending',
+            'startTime': start_time.isoformat(),
+            'endTime': end_time.isoformat(),
+            'apiKey': api_key,
+            'frequencyMinutes': f"{frequency}"
         })
         
         # Schedule recurring Lambda invocations
@@ -67,13 +69,18 @@ def lambda_handler(event, context):
             Name=rule_name,
             ScheduleExpression=f'rate({frequency} minutes)'
         )
+
         eventbridge.put_targets(
             Rule=rule_name,
             Targets=[
                 {
                     'Id': '1',
-                    'Arn': 'arn:aws:lambda:ap-southeast-1:537124958292:function:dataCollection',
-                    'Input': str({'jobId': job_id})
+                    'Arn': 'arn:aws:lambda:ap-southeast-1:537124958292:function:speedbands-DataCollectionLambda-9brbU9wtHbSD',
+                    'Input': json.dumps({
+                        'body': {
+                            'jobId': job_id
+                        }
+                    })
                 }
             ]
         )
