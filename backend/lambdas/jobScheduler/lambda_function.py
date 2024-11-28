@@ -2,6 +2,7 @@
 
 import boto3
 import uuid
+import json
 from datetime import datetime, timedelta
 
 # Initialise AWS services
@@ -45,7 +46,7 @@ def lambda_handler(event, context):
     try:
         # Generate a unique job ID
         job_id = str(uuid.uuid4())
-        start_time = datetime.now(datetime.timezone.utc)
+        start_time = datetime.now()
         end_time = start_time + timedelta(minutes=duration)
         
         # Save job metadata in DynamoDB
@@ -67,13 +68,14 @@ def lambda_handler(event, context):
             Name=rule_name,
             ScheduleExpression=f'rate({frequency} minutes)'
         )
+
         eventbridge.put_targets(
             Rule=rule_name,
             Targets=[
                 {
                     'Id': '1',
                     'Arn': 'arn:aws:lambda:ap-southeast-1:537124958292:function:dataCollection',
-                    'Input': str({'jobId': job_id})
+                    'Input': json.dumps({'jobId': job_id})
                 }
             ]
         )

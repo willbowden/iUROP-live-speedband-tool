@@ -1,3 +1,5 @@
+# jobChecker
+
 import boto3
 
 dynamodb = boto3.client('dynamodb')
@@ -13,7 +15,7 @@ event = {
     }
 }
 """
-def lambda_handler(event):
+def lambda_handler(event, context):
     body = event['body']
     job_id = body['jobId']
 

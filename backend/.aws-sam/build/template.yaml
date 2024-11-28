@@ -44,7 +44,7 @@ Resources:
       - arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
       - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
       - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
-      - arn:aws:iam::aws:policy/AmazonEventBridgeSchedulerFullAccess
+      - arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess
   DataCollectionRole:
     Type: AWS::IAM::Role
     Properties:
