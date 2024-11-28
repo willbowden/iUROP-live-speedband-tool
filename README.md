@@ -13,6 +13,7 @@
   - [Finding IDs](#finding-ids)
   - [Ammending the YAML](#ammending-the-yaml)
   - [Deploying the resources](#deploying-the-resources)
+  - [Final Linking](#final-linking)
 
 
 # AWS Setup Instructions
@@ -155,3 +156,27 @@ sam deploy --parameter-overrides TableAlreadyExists=true ResultsBucketAlreadyExi
 This is because the DynamoDB table and S3 bucket have `DeletionPolicy` set to `Retain` which means they aren't deleted in the event of a failure or re-deploy. This is so we don't lose the data inside them.
 
 If, for whatever reason, deployment fails, you will need to manually navigate to the AWS CloudFormation dashboard and delete the stack which is in state `ROLLBACK_COMPLETED` before you can deploy another stack with the same name.
+
+## Final Linking
+
+Once the resources are deployed, you need to change the code in one of the Lambdas.
+
+In `lambdas/jobScheduler/lambda_function.py`:
+```python
+eventbridge.put_targets(
+            Rule=rule_name,
+            Targets=[
+                {
+                    'Id': '1',
+                    'Arn': 'arn:aws:lambda:ap-southeast-1:537124958292:function:speedbands-DataCollectionLambda-9brbU9wtHbSD',
+                    'Input': json.dumps({
+                        'body': {
+                            'jobId': job_id
+                        }
+                    })
+                }
+            ]
+        )
+```
+
+Replace the string following `'Arn':` with the ARN of your DataCollection lambda.
