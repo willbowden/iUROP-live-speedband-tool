@@ -1,14 +1,13 @@
-import { prettyCoords, stringToCoords } from "@/util/stringCoordsToLatLng";
+import { stringToCoords } from "@/util/stringCoordsToLatLng";
 import { LatLng } from "leaflet";
 
-export interface MarkerJson {
-  objectType: "marker" | "path";
-  start?: string;
-  end?: string;
-  coords?: string;
-  color: string;
-  label: string;
-  weight?: number;
+export interface SpeedbandJson {
+  cameraId: string;
+  roadName: string;
+  linkId: string;
+  pathStart: string;
+  pathEnd: string;
+  cameraCoords: string;
 }
 
 export interface MarkerObj {
@@ -26,61 +25,55 @@ export interface PathObj {
 }
 
 export class Speedband {
-  id: LatLng;
+  id: string;
   start!: MarkerObj;
   end!: MarkerObj;
   camera!: MarkerObj;
   path!: PathObj;
 
-  static jsonToSpeedbands(markers: Array<MarkerJson>): Array<Speedband> {
-    let out = [];
+  static jsonToSpeedbands(bands: Array<SpeedbandJson>): Array<Speedband> {
+    let out: Array<Speedband> = [];
   
-    for (let i = 0; i < markers.length; i += 4) {
-      out.push(new Speedband([markers[i], markers[i + 1], markers[i + 2], markers[i + 3]]));
-    }
+    bands.forEach(b => {
+      out.push(new Speedband(b));
+    })
   
     return out;
   }
 
-  constructor(markers: Array<MarkerJson>) {
-    markers.forEach(m => {
-      if (m.objectType == "path") {
-        this.path = {
-          start: stringToCoords(m.start),
-          end: stringToCoords(m.end),
-          color: m.color,
-          weight: m.weight || 10,
-          label: m.label,
-        }
-      } else if (m.objectType == "marker") {
-        let newMarker = {
-          coords: stringToCoords(m.coords),
-          color: m.color,
-          label: m.label,
-        }
-        switch (m.label) {
-          case "S":
-            this.start = newMarker;
-            break;
-          case "E":
-            this.end = newMarker;
-            break;
-          case "C":
-            this.camera = newMarker;
-            break;
-        }
-      }
-    })
+  constructor(b: SpeedbandJson) {
 
-    this.id = this.start.coords;
+      this.path = {
+        start: stringToCoords(b.pathStart),
+        end: stringToCoords(b.pathEnd),
+        color: "cyan",
+        weight: 10,
+        label: b.roadName,
+      };
+
+      this.start = {
+        coords: stringToCoords(b.pathStart),
+        color: "green",
+        label: "S"
+      }
+
+      this.end = {
+        coords: stringToCoords(b.pathEnd),
+        color: "red",
+        label: "E"
+      }
+
+      this.camera = {
+        coords: stringToCoords(b.cameraCoords),
+        color: "blue",
+        label:" C"
+      }
+
+    this.id = b.cameraId;
   }
 
   get markers() {
     return [this.start, this.end, this.camera];
-  }
-
-  get prettyCoords() {
-    return prettyCoords(this.id);
   }
 
   get streetName() {

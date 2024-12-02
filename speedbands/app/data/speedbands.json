@@ -1,0 +1,418 @@
+[
+  {
+    "cameraId": "6710",
+    "roadName": "PAN ISLAND EXPRESSWAY",
+    "linkId": "103105815",
+    "pathStart": "1.3441100851209409, 103.78616341269772",
+    "pathEnd": "1.3436196253925363, 103.78499221155268",
+    "cameraCoords": "1.344205, 103.78577"
+  },
+  {
+    "cameraId": "3798",
+    "roadName": "EAST COAST PARKWAY",
+    "linkId": "103064655",
+    "pathStart": "1.2894858180109154, 103.86162633143994",
+    "pathEnd": "1.291272977695459, 103.86169210647662",
+    "cameraCoords": "1.29158484, 103.8615987"
+  },
+  {
+    "cameraId": "3795",
+    "roadName": "EAST COAST PARKWAY",
+    "linkId": "103115463",
+    "pathStart": "1.301513733916148, 103.91056463858123",
+    "pathEnd": "1.3018002773079511, 103.9115787270102",
+    "cameraCoords": "1.301451452, 103.9105963"
+  },
+  {
+    "cameraId": "6703",
+    "roadName": "PAN ISLAND EXPRESSWAY",
+    "linkId": "104008723",
+    "pathStart": "1.329305241513514, 103.84148517247998",
+    "pathEnd": "1.328888757409722, 103.84055379155676",
+    "cameraCoords": "1.328899, 103.84121"
+  },
+  {
+    "cameraId": "3796",
+    "roadName": "TANJONG KATONG ROAD SOUTH",
+    "linkId": "103105996",
+    "pathStart": "1.2984552950674046, 103.89798427688991",
+    "pathEnd": "1.297452094745137, 103.8982621080313",
+    "cameraCoords": "1.297512569, 103.8983019"
+  },
+  {
+    "cameraId": "5795",
+    "roadName": "PAN ISLAND EXPRESSWAY",
+    "linkId": "103103435",
+    "pathStart": "1.3261677429253291, 103.90578953842336",
+    "pathEnd": "1.326535619880043, 103.90701319962626",
+    "cameraCoords": "1.326024822, 103.905625"
+  },
+  {
+    "cameraId": "5794",
+    "roadName": "PAN ISLAND EXPRESSWAY",
+    "linkId": "103110551",
+    "pathStart": "1.330501574036978, 103.91548174053663",
+    "pathEnd": "1.3311932089604106, 103.91694586930784",
+    "cameraCoords": "1.3309693, 103.9168616"
+  },
+  {
+    "cameraId": "4704",
+    "roadName": "AYER RAJAH EXPRESSWAY",
+    "linkId": "103103152",
+    "pathStart": "1.2787333038311326, 103.82382367911131",
+    "pathEnd": "1.278075038925227, 103.82504230479924",
+    "cameraCoords": "1.27877, 103.82375"
+  },
+  {
+    "cameraId": "1003",
+    "roadName": "PAN ISLAND EXPRESSWAY",
+    "linkId": "109002171",
+    "pathStart": "1.3245066177785756, 103.87207833045842",
+    "pathEnd": "1.323730745259791, 103.8726616771658",
+    "cameraCoords": "1.323957439, 103.8728576"
+  },
+  {
+    "cameraId": "5798",
+    "roadName": "ALJUNIED WEST FLYOVER",
+    "linkId": "109002084",
+    "pathStart": "1.3200087734804484, 103.8762597888554",
+    "pathEnd": "1.3201936719122571, 103.8772250075436",
+    "cameraCoords": "1.320360781, 103.8771741"
+  },
+  {
+    "cameraId": "1704",
+    "roadName": "CHIN SWEE ROAD",
+    "linkId": "103061793",
+    "pathStart": "1.2856226340093184, 103.83779902301367",
+    "pathEnd": "1.284571673108064, 103.83680272049128",
+    "cameraCoords": "1.285693989, 103.8375245"
+  },
+  {
+    "cameraId": "1707",
+    "roadName": "CENTRAL EXPRESSWAY",
+    "linkId": "103103407",
+    "pathStart": "1.2798791493486743, 103.8296926102903",
+    "pathEnd": "1.280601638428846, 103.8304515505814",
+    "cameraCoords": "1.280365843, 103.8304511"
+  },
+  {
+    "cameraId": "6711",
+    "roadName": "EAST COAST PARKWAY",
+    "linkId": "103080124",
+    "pathStart": "1.3374012387388876, 103.978183492029",
+    "pathEnd": "1.338154502591772, 103.97706375592284",
+    "cameraCoords": "1.33771, 103.977827"
+  },
+  {
+    "cameraId": "6704",
+    "roadName": "PAN ISLAND EXPRESSWAY",
+    "linkId": "103068027",
+    "pathStart": "1.3265750422692364, 103.82690129151008",
+    "pathEnd": "1.3273293321448392, 103.82537697226584",
+    "cameraCoords": "1.326574036, 103.8268573"
+  },
+  {
+    "cameraId": "6713",
+    "roadName": "PAN ISLAND EXPRESSWAY",
+    "linkId": "103114147",
+    "pathStart": "1.341560956107131, 103.94691523361446",
+    "pathEnd": "1.3404500316402077, 103.9456657557846",
+    "cameraCoords": "1.340298, 103.945652"
+  },
+  {
+    "cameraId": "3705",
+    "roadName": "EAST COAST PARKWAY",
+    "linkId": "103064923",
+    "pathStart": "1.3284258467377124, 103.97430726865096",
+    "pathEnd": "1.3273480335380676, 103.9735833160783",
+    "cameraCoords": "1.32743, 103.97383"
+  },
+  {
+    "cameraId": "9701",
+    "roadName": "SELETAR EXPRESSWAY",
+    "linkId": "103104271",
+    "pathStart": "1.3944859312046332, 103.83450684238667",
+    "pathEnd": "1.394837890475923, 103.83593022884855",
+    "cameraCoords": "1.39466333, 103.834746"
+  },
+  {
+    "cameraId": "1703",
+    "roadName": "CENTRAL EXPRESSWAY",
+    "linkId": "103105875",
+    "pathStart": "1.3275497012219115, 103.86172836648169",
+    "pathEnd": "1.3285943640566584, 103.862136735764",
+    "cameraCoords": "1.328147222, 103.8622033"
+  },
+  {
+    "cameraId": "9706",
+    "roadName": "SELETAR EXPRESSWAY",
+    "linkId": "103064863",
+    "pathStart": "1.412642601346962, 103.8064595486871",
+    "pathEnd": "1.4112243570166714, 103.80700700148648",
+    "cameraCoords": "1.41270056, 103.8064271"
+  },
+  {
+    "cameraId": "1706",
+    "roadName": "CENTRAL EXPRESSWAY",
+    "linkId": "103115296",
+    "pathStart": "1.3875622410247723, 103.85824306441847",
+    "pathEnd": "1.3887768403285647, 103.8580350115358",
+    "cameraCoords": "1.38861, 103.85806"
+  },
+  {
+    "cameraId": "9705",
+    "roadName": "SELETAR EXPRESSWAY",
+    "linkId": "103104543",
+    "pathStart": "1.4259065049688824, 103.7879754673467",
+    "pathEnd": "1.4262076423117271, 103.7867431600187",
+    "cameraCoords": "1.42627712, 103.7871664"
+  },
+  {
+    "cameraId": "8704",
+    "roadName": "CHOA CHU KANG DRIVE",
+    "linkId": "103097352",
+    "pathStart": "1.3899309653588685, 103.7486160954201",
+    "pathEnd": "1.3897336551878234, 103.7499847248648",
+    "cameraCoords": "1.3899, 103.74843"
+  },
+  {
+    "cameraId": "1701",
+    "roadName": "CENTRAL EXPRESSWAY",
+    "linkId": "103104207",
+    "pathStart": "1.3247893635307513, 103.8592874317101",
+    "pathEnd": "1.3238975344296364, 103.85832191776572",
+    "cameraCoords": "1.323604823, 103.8587802"
+  },
+  {
+    "cameraId": "4714",
+    "roadName": "AYER RAJAH EXPRESSWAY",
+    "linkId": "103105575",
+    "pathStart": "1.3105991287773198, 103.76413083455584",
+    "pathEnd": "1.3096032501682369, 103.76504345395216",
+    "cameraCoords": "1.31023, 103.76438"
+  },
+  {
+    "cameraId": "8701",
+    "roadName": "KRANJI EXPRESSWAY",
+    "linkId": "103116279",
+    "pathStart": "1.3855009081195804, 103.74028064765876",
+    "pathEnd": "1.3866054028652464, 103.74156683446697",
+    "cameraCoords": "1.38647, 103.74143"
+  },
+  {
+    "cameraId": "6712",
+    "roadName": "PAN ISLAND EXPRESSWAY",
+    "linkId": "103046839",
+    "pathStart": "1.3325083214954738, 103.76904948999758",
+    "pathEnd": "1.3330852996096512, 103.7705557429388",
+    "cameraCoords": "1.332691, 103.770278"
+  },
+  {
+    "cameraId": "1711",
+    "roadName": "CENTRAL EXPRESSWAY",
+    "linkId": "103115271",
+    "pathStart": "1.351500463261179, 103.85755177764791",
+    "pathEnd": "1.352801386450744, 103.85713660905402",
+    "cameraCoords": "1.35296, 103.85719"
+  },
+  {
+    "cameraId": "2704",
+    "roadName": "BUKIT TIMAH EXPRESSWAY",
+    "linkId": "103104628",
+    "pathStart": "1.4292605162576928, 103.76939150989864",
+    "pathEnd": "1.4306103223449134, 103.768704174753",
+    "cameraCoords": "1.429588536, 103.769311"
+  },
+  {
+    "cameraId": "4706",
+    "roadName": "AYER RAJAH EXPRESSWAY",
+    "linkId": "103065539",
+    "pathStart": "1.2988947311498005, 103.78051840645524",
+    "pathEnd": "1.298105648138978, 103.78192714209852",
+    "cameraCoords": "1.29792, 103.78205"
+  },
+  {
+    "cameraId": "4705",
+    "roadName": "AYER RAJAH EXPRESSWAY",
+    "linkId": "104004423",
+    "pathStart": "1.3264024204854308, 103.73206239205432",
+    "pathEnd": "1.326075552639828, 103.73066035731964",
+    "cameraCoords": "1.32618, 103.73028"
+  },
+  {
+    "cameraId": "8706",
+    "roadName": "PAN ISLAND EXPRESSWAY",
+    "linkId": "107002776",
+    "pathStart": "1.365930052875766, 103.70863188981026",
+    "pathEnd": "1.3662576898617664, 103.70889459590842",
+    "cameraCoords": "1.3664, 103.70899"
+  },
+  {
+    "cameraId": "6705",
+    "roadName": "ADAM ROAD",
+    "linkId": "108001532",
+    "pathStart": "1.3321915196564234, 103.81751098398574",
+    "pathEnd": "1.3318270643326893, 103.81807573797391",
+    "cameraCoords": "1.332124, 103.81768"
+  },
+  {
+    "cameraId": "2703",
+    "roadName": "BUKIT TIMAH EXPRESSWAY",
+    "linkId": "103066483",
+    "pathStart": "1.3493315225341391, 103.79160395556782",
+    "pathEnd": "1.350799117998366, 103.7906998772477",
+    "cameraCoords": "1.350477908, 103.7910336"
+  },
+  {
+    "cameraId": "2708",
+    "roadName": "BUKIT TIMAH EXPRESSWAY",
+    "linkId": "103104640",
+    "pathStart": "1.3860633896031735, 103.77498489301873",
+    "pathEnd": "1.3876947419407284, 103.77453441459424",
+    "cameraCoords": "1.3865, 103.7747"
+  },
+  {
+    "cameraId": "7797",
+    "roadName": "SELETAR EXPRESSWAY",
+    "linkId": "103066584",
+    "pathStart": "1.399961548758433, 103.85671434791396",
+    "pathEnd": "1.400499613524258, 103.85804274474454",
+    "cameraCoords": "1.40002575, 103.8570253"
+  },
+  {
+    "cameraId": "4702",
+    "roadName": "AYER RAJAH EXPRESSWAY",
+    "linkId": "104002515",
+    "pathStart": "1.2724557804201406, 103.83238494721076",
+    "pathEnd": "1.2723160381048562, 103.83309544610437",
+    "cameraCoords": "1.27237, 103.8324"
+  },
+  {
+    "cameraId": "3704",
+    "roadName": "EAST COAST PARKWAY",
+    "linkId": "104004183",
+    "pathStart": "1.295610008464168, 103.88014033510846",
+    "pathEnd": "1.2956742576674545, 103.8818842738069",
+    "cameraCoords": "1.295855016, 103.8803147"
+  },
+  {
+    "cameraId": "7793",
+    "roadName": "TAMPINES EXPRESSWAY",
+    "linkId": "103103527",
+    "pathStart": "1.3772517802589537, 103.9284068020047",
+    "pathEnd": "1.3768263944427757, 103.92954188789984",
+    "cameraCoords": "1.37704704, 103.9294698"
+  },
+  {
+    "cameraId": "4701",
+    "roadName": "AYER RAJAH EXPRESSWAY",
+    "linkId": "103102451",
+    "pathStart": "1.2875263383331863, 103.79525498153671",
+    "pathEnd": "1.286964534628196, 103.79625137215068",
+    "cameraCoords": "1.2871, 103.79633"
+  },
+  {
+    "cameraId": "7794",
+    "roadName": "HALUS LINK",
+    "linkId": "103107240",
+    "pathStart": "1.3805551261654982, 103.91976230806137",
+    "pathEnd": "1.379804395616717, 103.92051735189705",
+    "cameraCoords": "1.37988658, 103.9200917"
+  },
+  {
+    "cameraId": "3702",
+    "roadName": "PAN ISLAND EXPRESSWAY",
+    "linkId": "103110492",
+    "pathStart": "1.3383099070402464, 103.98026667627836",
+    "pathEnd": "1.3398213153899443, 103.98111043877248",
+    "cameraCoords": "1.33831, 103.98032"
+  },
+  {
+    "cameraId": "4708",
+    "roadName": "AYER RAJAH EXPRESSWAY",
+    "linkId": "103103591",
+    "pathStart": "1.2996764969597443, 103.77910681274476",
+    "pathEnd": "1.2988947311498005, 103.78051840645524",
+    "cameraCoords": "1.29939, 103.7799"
+  },
+  {
+    "cameraId": "4709",
+    "roadName": "AYER RAJAH EXPRESSWAY",
+    "linkId": "103067427",
+    "pathStart": "1.3125393163477197, 103.7622472702445",
+    "pathEnd": "1.3115767563539924, 103.76319746745968",
+    "cameraCoords": "1.312019, 103.763002"
+  },
+  {
+    "cameraId": "6706",
+    "roadName": "PAN ISLAND EXPRESSWAY",
+    "linkId": "103068099",
+    "pathStart": "1.3489093170955406, 103.79642471417952",
+    "pathEnd": "1.3493011329580702, 103.7952615729302",
+    "cameraCoords": "1.349428893, 103.7952799"
+  },
+  {
+    "cameraId": "4712",
+    "roadName": "AYER RAJAH EXPRESSWAY",
+    "linkId": "103103771",
+    "pathStart": "1.3401823864660314, 103.64536935200896",
+    "pathEnd": "1.3414041131313883, 103.6440884855044",
+    "cameraCoords": "1.341244001, 103.6439134"
+  },
+  {
+    "cameraId": "4713",
+    "roadName": "TUAS CHECKPOINT VIADUCT",
+    "linkId": "106004168",
+    "pathStart": "1.3475702253089743, 103.63725933670496",
+    "pathEnd": "1.3467145087316852, 103.6384557882485",
+    "cameraCoords": "1.347645829, 103.6366955"
+  },
+  {
+    "cameraId": "4710",
+    "roadName": "AYER RAJAH EXPRESSWAY",
+    "linkId": "103103763",
+    "pathStart": "1.3222539158949034, 103.75073056671832",
+    "pathEnd": "1.3217975502817552, 103.7521972700326",
+    "cameraCoords": "1.32153, 103.75273"
+  },
+  {
+    "cameraId": "2706",
+    "roadName": "BUKIT TIMAH EXPRESSWAY",
+    "linkId": "103104539",
+    "pathStart": "1.4127678972186186, 103.77144589753144",
+    "pathEnd": "1.414566865013272, 103.77141003223043",
+    "cameraCoords": "1.414142, 103.771168"
+  },
+  {
+    "cameraId": "4798",
+    "roadName": "SENTOSA GATEWAY",
+    "linkId": "104004491",
+    "pathStart": "1.2598040758731706, 103.82378589314465",
+    "pathEnd": "1.2614005335611, 103.82381809070095",
+    "cameraCoords": "1.259999997, 103.8236111"
+  },
+  {
+    "cameraId": "1504",
+    "roadName": "EAST COAST PARKWAY",
+    "linkId": "113000192",
+    "pathStart": "1.2942778725303583, 103.8764768352065",
+    "pathEnd": "1.2928783733658635, 103.87564521071556",
+    "cameraCoords": "1.294098914, 103.8760562"
+  },
+  {
+    "cameraId": "1006",
+    "roadName": "KALLANG PAYA LEBAR EXPRESSWAY TUNNEL",
+    "linkId": "108002959",
+    "pathStart": "1.3551199160025549, 103.90089186660416",
+    "pathEnd": "1.3566797294063633, 103.90174642704795",
+    "cameraCoords": "1.357098686, 103.902042"
+  },
+  {
+    "cameraId": "1501",
+    "roadName": "STRAITS BOULEVARD",
+    "linkId": "113000212",
+    "pathStart": "1.2743120921829671, 103.85090987473896",
+    "pathEnd": "1.2739486112710108, 103.85198380232512",
+    "cameraCoords": "1.274143944, 103.8513168"
+  }
+]

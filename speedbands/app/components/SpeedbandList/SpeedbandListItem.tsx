@@ -1,11 +1,9 @@
 import { Speedband } from "@/lib/speedband"
-import { prettyCoords } from "@/util/stringCoordsToLatLng";
-import { LatLng } from "leaflet";
 import { useState } from "react";
 import styles from "@/page.module.css";
 
 type SpeedbandListItemProps = {
-  listItemClicked: (id: LatLng, selectedStatus: boolean) => boolean;
+  listItemClicked: (id: string, selectedStatus: boolean) => boolean;
   speedband: Speedband;
 }
 
@@ -26,7 +24,7 @@ export default function SpeedbandListItem({ listItemClicked, speedband }: Speedb
           name="speedband"
           checked={selected} />
       </td>
-      <td>{prettyCoords(speedband.id)}</td>
+      <td>{speedband.id}</td>
       <td>{speedband.path.label}</td>
     </tr>
   )
