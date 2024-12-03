@@ -16,9 +16,16 @@ INPUT FORMAT:
 event = {
     body: {
         userId: STRING,
-        jobId: STRING,
+        apiKey: STRING,
         durationMinutes: INTEGER,
         frequencyMinutes: INTEGER,
+        speedbands: [
+            {
+                cameraId: STRING,
+                linkId: STRING
+            }, 
+            ...
+        ]
     }
 }
 """
@@ -29,12 +36,14 @@ def lambda_handler(event, context):
     api_key = body['apiKey']
     duration = body['durationMinutes']
     frequency = body['frequencyMinutes']
+    speedbands = body['speedbands']
 
     try:
         assert type(user_id) == str and len(user_id) > 0, "\"userId\" must be a defined string"
         assert type(api_key) == str and len(api_key), "\"apiKey\" must be a defined string"
         assert type(duration) == int and duration in [1, 5, 10, 15, 30], "\"duration\" must be an integer and one of [1, 5, 10, 15, 30]"
         assert type(frequency) == int and frequency in [5, 10, 15], "\"frequency must\" be an integer and one of [5, 10, 15]"
+        assert type(speedbands) == list and len(speedbands) > 0 and "cameraId" in speedbands[0] and "linkId" in speedbands[0], "\"speedbands\" must be a list of dictionaries containing a 'cameraId' and 'linkId' each"
     except AssertionError as ae:
         return {
             "statusCode": 400,
@@ -60,7 +69,8 @@ def lambda_handler(event, context):
             'startTime': start_time.isoformat(),
             'endTime': end_time.isoformat(),
             'apiKey': api_key,
-            'frequencyMinutes': f"{frequency}"
+            'frequencyMinutes': f"{frequency}",
+            "speedbands": json.dumps(speedbands)
         })
         
         # Schedule recurring Lambda invocations

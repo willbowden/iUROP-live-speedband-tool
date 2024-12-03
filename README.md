@@ -102,13 +102,16 @@ AWS Amplify is used to provide user authentication for the frontend. Below are t
 
 1. Under `/speedbands` in this repo, delete the `amplify` folder. We will create a new Amplify setup configured to you.
 2. In the `/speedbands` directory, run `amplify init` and use the following options:
-   1. **Name**: Enter a name for the project
-   2. **Environment**: Name your environment (e.g., dev)
-   3. **Default editor**: Choose your code editor
-   4. **App type**: Select JavaScript
-   5. **Framework**: Choose Next.js
-   6. **Source and build settings**: Use the defaults
-   7. **Hosting**: Skip this
+   1. Choose to use the Amplify Gen 1 CLI
+   2. **Name**: Enter a name for the project, e.g "speedbands"
+   3. **Environment**: Name your environment (e.g., prod)
+   4. **Default editor**: Choose your code editor
+   5. **App type**: Select JavaScript
+   6. **Framework**: Choose Next.js
+   7. **Source and build settings**: Use the defaults
+   8. **Region**: Choose your aws region, e.g "ap-southeast-1"
+   9. **Hosting**: Skip this
+   10. Address any other options that arise (they may be different to above)
 3. Run `amplify add auth`
    1. Select the options to sign in with Cognito and email/password
    2. You may use other authentication options if you desire, but you would need to change the frontend to accomodate it.
@@ -159,6 +162,7 @@ If, for whatever reason, deployment fails, you will need to manually navigate to
 
 ## Final Linking
 
+### Lambdas
 Once the resources are deployed, you need to change the code in one of the Lambdas.
 
 In `lambdas/jobScheduler/lambda_function.py`:
@@ -180,3 +184,30 @@ eventbridge.put_targets(
 ```
 
 Replace the string following `'Arn':` with the ARN of your DataCollection lambda.
+
+### Amplify
+
+1. Navigate to the AWS Dashboard
+2. Navigate to API Gateway
+3. Click "APIs"
+4. Find the one you created
+5. Click "Stages"
+6. Click the one named "Stage" or otherwise not 'default'
+8. Copy the "Invoke URL" that displays for that stage..
+
+You'll need to connect AWS Amplify to your the API to allow authenticated requests. In `speedbands/components/AuthProvider.tsx`:
+
+Change:
+```js
+API: {
+    REST: {
+      "SpeedbandsAPI": {
+        endpoint: "YOUR ENDPOINT HERE",
+        region: "ap-southeast-1"
+      }
+    }
+  }
+```
+so that the `endpoint: ` contains the Invoke URL you obtained above.
+
+**Note:** If you have to redploy your infrastructure using `sam deploy` for whatever reason, you need to find the new Invoke URL of your API and put it here again.

@@ -16,5 +16,23 @@
         "speedbandsAmplifyAuth": {}
       }
     }
+  },
+  "speedbands": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-speedbands-speedbands-ac6bc-authRole",
+      "UnauthRoleArn": "arn:aws:iam::537124958292:role/amplify-speedbands-speedbands-ac6bc-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::537124958292:role/amplify-speedbands-speedbands-ac6bc-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-speedbands-speedbands-ac6bc-deployment",
+      "UnauthRoleName": "amplify-speedbands-speedbands-ac6bc-unauthRole",
+      "StackName": "amplify-speedbands-speedbands-ac6bc",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:537124958292:stack/amplify-speedbands-speedbands-ac6bc/141a48c0-b158-11ef-a340-02e1977f6e89",
+      "AmplifyAppId": "d345ruxgc2ewp5"
+    },
+    "categories": {
+      "auth": {
+        "speedbandsAmplifyAuth": {}
+      }
+    }
   }
 }

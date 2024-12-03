@@ -2,9 +2,23 @@
 
 import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from 'aws-amplify';
-import config from '@/aws-exports';
+import awsconfig from '@/aws-exports';
+Amplify.configure(awsconfig);
 
-Amplify.configure(config);
+const existingConfig = Amplify.getConfig();
+
+Amplify.configure({
+  ...existingConfig,
+  API: {
+    REST: {
+      "SpeedbandsAPI": {
+        endpoint: "https://h0qm611umd.execute-api.ap-southeast-1.amazonaws.com/Stage",
+        region: "ap-southeast-1"
+      }
+    }
+  }
+});
+
 
 export default function AuthProvider({
   children,

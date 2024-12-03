@@ -19,16 +19,6 @@ Conditions:
   CreateResultsBucket: !Equals [!Ref ResultsBucketAlreadyExists, false]
 
 Resources:
-  # API
-  SpeedbandsAPI:
-    Type: AWS::Serverless::Api
-    Properties:
-      StageName: default
-      Cors:
-        AllowMethods: "'GET,POST'"
-        AllowHeaders: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
-        AllowOrigin: "'*'"
-
   # Execution roles
   JobSchedulerRole:
     Type: AWS::IAM::Role
@@ -70,13 +60,6 @@ Resources:
         Runtime: python3.10
         CodeUri: ./lambdas/jobScheduler/
         Role: !GetAtt JobSchedulerRole.Arn
-        Events:
-          CreateJob:
-            Type: Api
-            Properties:
-              RestApiId: !Ref SpeedbandsAPI
-              Path: /jobs/create
-              Method: POST
         VpcConfig:
           SubnetIds:
             # REPLACE WITH YOUR OWN SUBNET IDS
@@ -94,13 +77,6 @@ Resources:
         Runtime: python3.10
         CodeUri: ./lambdas/jobChecker/
         Role: !GetAtt JobSchedulerRole.Arn
-        Events:
-          CheckJob:
-            Type: Api
-            Properties:
-              RestApiId: !Ref SpeedbandsAPI
-              Path: /jobs/check/{jobId}
-              Method: GET
         VpcConfig:
           SubnetIds:
             # REPLACE WITH YOUR OWN SUBNET IDS
@@ -164,6 +140,50 @@ Resources:
           - Id: ExpireOldResults
             Status: Enabled
             ExpirationInDays: 30
+  
+  SpeedbandsAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: default
+      Cors:
+        AllowOrigin: "'*'"
+        AllowMethods: "'GET,POST'"
+        AllowHeaders: "'Content-Type,Authorization,x-amz-security-token'"
+      DefinitionBody:
+        openapi: 3.0.1
+        info:
+          title: "Speedbands API"
+          description: "API for Speedbands service"
+          version: "1.0.0"
+        paths:
+          /jobs/create:
+              post:
+                summary: "Create a new job"
+                operationId: "CreateJob"
+                x-amazon-apigateway-integration:
+                  uri: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${JobSchedulerLambda}/invocations
+                  httpMethod: POST
+                  type: aws_proxy
+                responses: {}
+                x-amazon-apigateway-cors:
+                  allowOrigins:
+                    - "*"
+                  allowMethods:
+                    - "POST"
+          /jobs/check/{jobId}:
+            get:
+              summary: "Check job status"
+              operationId: "CheckJob"
+              x-amazon-apigateway-integration:
+                uri: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:function:${JobCheckerLambda}/invocations
+                httpMethod: GET
+                type: aws_proxy
+              responses: {}
+              x-amazon-apigateway-cors:
+                allowOrigins:
+                  - "*"
+                allowMethods:
+                  - "GET"
 
 
   

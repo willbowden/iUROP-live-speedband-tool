@@ -26,6 +26,7 @@ export interface PathObj {
 
 export class Speedband {
   id: string;
+  linkId: string;
   start!: MarkerObj;
   end!: MarkerObj;
   camera!: MarkerObj;
@@ -70,6 +71,7 @@ export class Speedband {
       }
 
     this.id = b.cameraId;
+    this.linkId = b.linkId;
   }
 
   get markers() {
