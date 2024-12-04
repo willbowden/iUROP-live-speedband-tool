@@ -67,6 +67,8 @@ export default function StartCollection() {
   const [duration, setDuration] = useState<number>(15);
   const [frequency, setFrequency] = useState<number>(5);
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const router = useRouter();
   const pathname = usePathname();
 
@@ -87,6 +89,7 @@ export default function StartCollection() {
   };
 
   const submitJob = async () => {
+    setLoading(true);
     const { userId } = await getCurrentUser();
 
     const data: JobCreationInput = {
@@ -102,7 +105,10 @@ export default function StartCollection() {
       })
     }
 
-    CreateJob(data).then(res => console.log(res));
+    CreateJob(data).then(res => {
+      router.push(`${pathname}/in_progress?jobId=${res.jobId}`);
+    }
+    );
   }
 
   return (
@@ -120,8 +126,7 @@ export default function StartCollection() {
           <Form.Item name="API Key" rules={[{ required: true }]} style={{width: "100%"}}>
             <Input
               placeholder="Your LTA API Key"
-              onChange={(e) => setApiKey(e.target.value)}
-              type="password"></Input>
+              onChange={(e) => setApiKey(e.target.value)}></Input>
           </Form.Item>
 
           <Title
@@ -173,6 +178,7 @@ export default function StartCollection() {
 
         <Button
           type="primary"
+          disabled={loading}
           style={buttonStyle}
           htmlType="submit"
         >Start Job</Button>

@@ -12,7 +12,7 @@ Amplify.configure({
   API: {
     REST: {
       "SpeedbandsAPI": {
-        endpoint: "https://h0qm611umd.execute-api.ap-southeast-1.amazonaws.com/Stage",
+        endpoint: "https://xbaa692z24.execute-api.ap-southeast-1.amazonaws.com/Stage",
         region: "ap-southeast-1"
       }
     }

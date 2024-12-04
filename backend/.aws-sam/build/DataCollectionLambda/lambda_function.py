@@ -1,5 +1,6 @@
 # dataCollection
 
+import json
 import boto3
 from datetime import datetime
 
@@ -51,21 +52,13 @@ def lambda_handler(event, context):
         return
 
     # Make the API request FOR TESTING
-    response = {}
-    response.text = "Hello from DataCollection!"
-    response.status_code = 200
+    response = {
+        "statusCode": 200,
+        "body": json.dumps({"message": "Hello from DataCollection!"})
+    }
 
-    if response.status_code == 200:
-        # Write data to S3
-        file_key = f"jobs/{job['userId']}/{job_id}/{datetime.now().isoformat()}.csv"
-        s3.put_object(Bucket=S3_BUCKET, Key=file_key, Body=response.text)
-
-        # Update DynamoDB with the latest data path
-        table.update_item(
-            Key={"jobId": job_id},
-            UpdateExpression="SET lastResultPath = :path",
-            ExpressionAttributeValues={":path": file_key},
-        )
+    if response["statusCode"] == 200:
+        return response
     else:
         # Log the error and update the job status
         table.update_item(

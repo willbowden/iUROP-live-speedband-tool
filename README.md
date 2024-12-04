@@ -185,6 +185,8 @@ eventbridge.put_targets(
 
 Replace the string following `'Arn':` with the ARN of your DataCollection lambda.
 
+**You'll then need to re-run `sam build` and `sam deploy` to update the Lambda code.**
+
 ### Amplify
 
 1. Navigate to the AWS Dashboard
@@ -209,5 +211,3 @@ API: {
   }
 ```
 so that the `endpoint: ` contains the Invoke URL you obtained above.
-
-**Note:** If you have to redploy your infrastructure using `sam deploy` for whatever reason, you need to find the new Invoke URL of your API and put it here again.

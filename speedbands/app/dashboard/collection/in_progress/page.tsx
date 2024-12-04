@@ -41,6 +41,7 @@ export default function CollectionInProgress() {
   const [id,] = useState<string>(searchParams.get("jobId") || "");
 
   const row = {
+    key: id,
     jobId: id,
     cameras: 0,
     duration: "TEST",
