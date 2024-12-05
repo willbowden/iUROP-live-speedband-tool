@@ -127,16 +127,25 @@ The `template.yaml` file in this repo under `/backend` will allow you to deploy 
 
 ## Finding IDs
 
+### VPC
 1. On the AWS dashboard, navigate to VPC
 2. Navigate to "Subnets"
 3. Copy and save the Subnet IDs for `lambda-subnet-point-to-nat-`1, 2 and 3.
 4. Navigate to Security groups
 5. Copy and save the Security group ID for your default (only) security group.
 
+### User Pool
+
+1. On the AWS dashboard, navigate to Cognito
+2. Navigate to User Pools
+3. Click on the user pool created by Amplify in step [3](#3-setting-up-aws-amplify)
+4. Copy and save the ARN
+
 ## Ammending the YAML
 
 1. Open `template.yaml`
-2. Under `JobSchedulerLambda`, `JobCheckerLambda` and `DataCollectionLambda`, replace the existing `SubnetIds` with the three you saved above, and replace the `SecurityGroupIds` with the one you saved above.
+2. Under `JobSchedulerLambda`, `JobCheckerLambda`, `DataCollectionLambda` and `GetUserJobsLambda`, replace the existing `SubnetIds` with the three you saved above, and replace the `SecurityGroupIds` with the one you saved above.
+3. Under `SpeedbandsAPI`, replace the existing `UserPoolArn` with the one you saved above.
 
 
 ## Deploying the resources

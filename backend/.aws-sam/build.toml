@@ -27,4 +27,13 @@ manifest_hash = ""
 packagetype = "Zip"
 functions = ["DataCollectionLambda"]
 
+[function_build_definitions.b08d439c-b82a-4ebe-8084-dca5e42c27ed]
+codeuri = "/home/will/repos/iUROP-live-speedband-tool/backend/lambdas/getUserJobs"
+runtime = "python3.10"
+architecture = "x86_64"
+handler = "lambda_function.lambda_handler"
+manifest_hash = ""
+packagetype = "Zip"
+functions = ["GetUserJobsLambda"]
+
 [layer_build_definitions]

@@ -53,6 +53,49 @@ Resources:
       - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
       - arn:aws:iam::aws:policy/AmazonS3FullAccess
       - arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess
+  GetUserJobsRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service: lambda.amazonaws.com
+          Action: sts:AssumeRole
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/AmazonDynamoDBReadOnlyAccess
+      - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
+  GetUserJobsLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.10
+      CodeUri: GetUserJobsLambda
+      Role:
+        Fn::GetAtt:
+        - GetUserJobsRole
+        - Arn
+      Events:
+        GetUserJobs:
+          Type: Api
+          Properties:
+            RestApiId:
+              Ref: SpeedbandsAPI
+            Path: /jobs/get
+            Method: GET
+            Auth:
+              Authorizer: CognitoAuthorizer
+      VpcConfig:
+        SubnetIds:
+        - subnet-03f22d08a04b1627f
+        - subnet-0b036e4ef099f6e24
+        - subnet-010c5679b46dbf897
+        SecurityGroupIds:
+        - sg-0c24ac90309044d8d
+    Metadata:
+      SamResourceId: GetUserJobsLambda
   JobSchedulerLambda:
     Type: AWS::Serverless::Function
     Properties:
@@ -71,6 +114,8 @@ Resources:
               Ref: SpeedbandsAPI
             Path: /jobs/create
             Method: POST
+            Auth:
+              Authorizer: CognitoAuthorizer
       VpcConfig:
         SubnetIds:
         - subnet-03f22d08a04b1627f
@@ -98,6 +143,8 @@ Resources:
               Ref: SpeedbandsAPI
             Path: /jobs/check/{jobId}
             Method: GET
+            Auth:
+              Authorizer: CognitoAuthorizer
       VpcConfig:
         SubnetIds:
         - subnet-03f22d08a04b1627f
@@ -170,3 +217,8 @@ Resources:
         AllowOrigin: '''*'''
         AllowMethods: '''GET,POST'''
         AllowHeaders: '''Content-Type,Authorization,x-amz-security-token'''
+      Auth:
+        DefaultAuthorizer: CognitoAuthorizer
+        Authorizers:
+          CognitoAuthorizer:
+            UserPoolArn: arn:aws:cognito-idp:ap-southeast-1:537124958292:userpool/ap-southeast-1_YkAjQ6uvu

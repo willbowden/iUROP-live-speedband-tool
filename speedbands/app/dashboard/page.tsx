@@ -1,5 +1,6 @@
 "use client"
 
+import { GetUserJobs } from "@/lib/api";
 import { Button, Flex } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
@@ -19,6 +20,13 @@ export default function DashboardStart() {
         style={buttonStyle}
         onClick={() => { router.push(`${pathname}/collection`) }}
       >Start Collection Job</Button>
+      <Button
+        type="primary"
+        style={buttonStyle}
+        onClick={() => { 
+          GetUserJobs().then(res => console.log(res));
+         }}
+      >Test API</Button>
       {/* <Button
         type="primary"
         style={buttonStyle}
