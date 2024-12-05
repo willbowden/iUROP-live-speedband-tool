@@ -17,6 +17,7 @@
     "@reduxjs/toolkit": "^2.3.0",
     "antd": "^5.21.6",
     "aws-amplify": "^6.10.0",
+    "jwt-decode": "^4.0.0",
     "leaflet-defaulticon-compatibility": "^0.1.2",
     "next": "14.2.15",
     "react": "^18.3.1",

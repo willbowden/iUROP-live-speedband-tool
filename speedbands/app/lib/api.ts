@@ -1,5 +1,6 @@
 import { post, get } from "aws-amplify/api";
 import { fetchAuthSession } from "aws-amplify/auth";
+import { jwtDecode } from "jwt-decode";
 
 type SpeedbandType = {
   cameraId: string,
@@ -32,9 +33,9 @@ export async function CreateJob(data: JobCreationInput): Promise<JobCreationResp
     // }).response;
 
     // if (response.statusCode == 200) {
-      // return {
-      //   ...response.body.json(),
-      // };
+    // return {
+    //   ...response.body.json(),
+    // };
     // } else {
     //   throw new Error(response.body.json().toString());
     // }
@@ -64,16 +65,15 @@ type GetUserJobsResponse = {
 }
 
 export async function GetUserJobs(): Promise<GetUserJobsResponse> {
-  const authSession = await fetchAuthSession();
-
-  console.log(authSession.tokens?.idToken);
+  const authToken = (await fetchAuthSession()).tokens?.idToken?.toString() || "";
+  // console.log(jwtDecode(authToken));
 
   try {
     const response = await get({
       apiName: "SpeedbandsAPI",
       options: {
         headers: {
-          Authorization: `Bearer ${authSession.tokens?.idToken}`,
+          Authorization: authToken
         }
       },
       path: "/jobs/get",
