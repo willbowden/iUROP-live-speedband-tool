@@ -231,12 +231,9 @@ Resources:
         Ref: SpeedbandsAPI
       Integration:
         IntegrationHttpMethod: POST
-        Type: AWS
+        Type: AWS_PROXY
         Uri:
           Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetUserJobsLambda.Arn}/invocations
-      MethodResponses:
-      - StatusCode: '200'
-      - StatusCode: '404'
   GetUserJobsOptionsMethod:
     Type: AWS::ApiGateway::Method
     Properties:
@@ -279,12 +276,9 @@ Resources:
         Ref: SpeedbandsAPI
       Integration:
         IntegrationHttpMethod: POST
-        Type: AWS
+        Type: AWS_PROXY
         Uri:
           Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${JobSchedulerLambda.Arn}/invocations
-      MethodResponses:
-      - StatusCode: '200'
-      - StatusCode: '400'
   ScheduleJobOptionsMethod:
     Type: AWS::ApiGateway::Method
     Properties:
@@ -327,13 +321,9 @@ Resources:
         Ref: SpeedbandsAPI
       Integration:
         IntegrationHttpMethod: POST
-        Type: AWS
+        Type: AWS_PROXY
         Uri:
           Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${JobCheckerLambda.Arn}/invocations
-      MethodResponses:
-      - StatusCode: '200'
-      - StatusCode: '400'
-      - StatusCode: '404'
   CheckJobOptionsMethod:
     Type: AWS::ApiGateway::Method
     Properties:
@@ -377,3 +367,30 @@ Resources:
       RestApiId:
         Ref: SpeedbandsAPI
       StageName: default
+  GetUserJobsInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: GetUserJobsLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Sub: arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${SpeedbandsAPI}/*
+  CheckJobInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: JobCheckerLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Sub: arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${SpeedbandsAPI}/*
+  JobSchedulerInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName:
+        Ref: JobSchedulerLambda
+      Action: lambda:InvokeFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        Fn::Sub: arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${SpeedbandsAPI}/*
