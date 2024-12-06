@@ -1,6 +1,4 @@
-import { post, get } from "aws-amplify/api";
-import { fetchAuthSession } from "aws-amplify/auth";
-import { jwtDecode } from "jwt-decode";
+import { get } from "aws-amplify/api";
 
 type SpeedbandType = {
   cameraId: string,
@@ -65,17 +63,9 @@ type GetUserJobsResponse = {
 }
 
 export async function GetUserJobs(): Promise<GetUserJobsResponse> {
-  const authToken = (await fetchAuthSession()).tokens?.idToken?.toString() || "";
-  // console.log(jwtDecode(authToken));
-
   try {
     const response = await get({
       apiName: "SpeedbandsAPI",
-      options: {
-        headers: {
-          Authorization: authToken
-        }
-      },
       path: "/jobs/get",
     }).response;
 

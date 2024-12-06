@@ -107,7 +107,7 @@ def lambda_handler(event, context):
             Targets=[
                 {
                     "Id": "1",
-                    "Arn": "arn:aws:lambda:ap-southeast-1:537124958292:function:speedbands-DataCollectionLambda-ASX072QxNYmx",
+                    "Arn": "arn:aws:lambda:ap-southeast-1:537124958292:function:speedbands-DataCollectionLambda-5cjpVG33rNxL",
                     "Input": json.dumps({"body": {"jobId": job_id}}),
                 }
             ],

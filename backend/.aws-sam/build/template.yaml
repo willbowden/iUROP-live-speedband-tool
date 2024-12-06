@@ -77,16 +77,6 @@ Resources:
         Fn::GetAtt:
         - GetUserJobsRole
         - Arn
-      Events:
-        GetUserJobs:
-          Type: Api
-          Properties:
-            RestApiId:
-              Ref: SpeedbandsAPI
-            Path: /jobs/get
-            Method: GET
-            Auth:
-              Authorizer: CognitoAuthorizer
       VpcConfig:
         SubnetIds:
         - subnet-03f22d08a04b1627f
@@ -106,16 +96,6 @@ Resources:
         Fn::GetAtt:
         - JobSchedulerRole
         - Arn
-      Events:
-        CreateJob:
-          Type: Api
-          Properties:
-            RestApiId:
-              Ref: SpeedbandsAPI
-            Path: /jobs/create
-            Method: POST
-            Auth:
-              Authorizer: CognitoAuthorizer
       VpcConfig:
         SubnetIds:
         - subnet-03f22d08a04b1627f
@@ -135,16 +115,6 @@ Resources:
         Fn::GetAtt:
         - JobSchedulerRole
         - Arn
-      Events:
-        CheckJob:
-          Type: Api
-          Properties:
-            RestApiId:
-              Ref: SpeedbandsAPI
-            Path: /jobs/check/{jobId}
-            Method: GET
-            Auth:
-              Authorizer: CognitoAuthorizer
       VpcConfig:
         SubnetIds:
         - subnet-03f22d08a04b1627f
@@ -197,9 +167,11 @@ Resources:
         KeyType: HASH
       BillingMode: PAY_PER_REQUEST
     DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
   DataCollectionResultsBucket:
     Type: AWS::S3::Bucket
     DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
     Condition: CreateResultsBucket
     Properties:
       BucketName:
@@ -210,15 +182,198 @@ Resources:
           Status: Enabled
           ExpirationInDays: 30
   SpeedbandsAPI:
-    Type: AWS::Serverless::Api
+    Type: AWS::ApiGateway::RestApi
     Properties:
+      Name: SpeedbandsAPI
+  JobsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Fn::GetAtt:
+        - SpeedbandsAPI
+        - RootResourceId
+      RestApiId:
+        Ref: SpeedbandsAPI
+      PathPart: jobs
+  GetUserJobsResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Ref: JobsResource
+      RestApiId:
+        Ref: SpeedbandsAPI
+      PathPart: get
+  ScheduleJobResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Ref: JobsResource
+      RestApiId:
+        Ref: SpeedbandsAPI
+      PathPart: create
+  CheckJobResource:
+    Type: AWS::ApiGateway::Resource
+    Properties:
+      ParentId:
+        Ref: JobsResource
+      RestApiId:
+        Ref: SpeedbandsAPI
+      PathPart: check
+  GetUserJobsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      ApiKeyRequired: false
+      AuthorizationType: AWS_IAM
+      HttpMethod: GET
+      ResourceId:
+        Ref: GetUserJobsResource
+      RestApiId:
+        Ref: SpeedbandsAPI
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS
+        Uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${GetUserJobsLambda.Arn}/invocations
+      MethodResponses:
+      - StatusCode: '200'
+      - StatusCode: '404'
+  GetUserJobsOptionsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      RestApiId:
+        Ref: SpeedbandsAPI
+      ResourceId:
+        Ref: GetUserJobsResource
+      HttpMethod: OPTIONS
+      Integration:
+        IntegrationResponses:
+        - StatusCode: '200'
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'''
+            method.response.header.Access-Control-Allow-Methods: '''GET,POST,OPTIONS'''
+            method.response.header.Access-Control-Allow-Origin: '''*'''
+          ResponseTemplates:
+            application/json: ''
+        PassthroughBehavior: WHEN_NO_MATCH
+        RequestTemplates:
+          application/json: '{"statusCode": 200}'
+        Type: MOCK
+      MethodResponses:
+      - StatusCode: '200'
+        ResponseModels:
+          application/json: Empty
+        ResponseParameters:
+          method.response.header.Access-Control-Allow-Headers: false
+          method.response.header.Access-Control-Allow-Methods: false
+          method.response.header.Access-Control-Allow-Origin: false
+  ScheduleJobMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      ApiKeyRequired: false
+      AuthorizationType: AWS_IAM
+      HttpMethod: GET
+      ResourceId:
+        Ref: ScheduleJobResource
+      RestApiId:
+        Ref: SpeedbandsAPI
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS
+        Uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${JobSchedulerLambda.Arn}/invocations
+      MethodResponses:
+      - StatusCode: '200'
+      - StatusCode: '400'
+  ScheduleJobOptionsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      RestApiId:
+        Ref: SpeedbandsAPI
+      ResourceId:
+        Ref: ScheduleJobResource
+      HttpMethod: OPTIONS
+      Integration:
+        IntegrationResponses:
+        - StatusCode: '200'
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'''
+            method.response.header.Access-Control-Allow-Methods: '''GET,POST,OPTIONS'''
+            method.response.header.Access-Control-Allow-Origin: '''*'''
+          ResponseTemplates:
+            application/json: ''
+        PassthroughBehavior: WHEN_NO_MATCH
+        RequestTemplates:
+          application/json: '{"statusCode": 200}'
+        Type: MOCK
+      MethodResponses:
+      - StatusCode: '200'
+        ResponseModels:
+          application/json: Empty
+        ResponseParameters:
+          method.response.header.Access-Control-Allow-Headers: false
+          method.response.header.Access-Control-Allow-Methods: false
+          method.response.header.Access-Control-Allow-Origin: false
+  CheckJobMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      ApiKeyRequired: false
+      AuthorizationType: AWS_IAM
+      HttpMethod: GET
+      ResourceId:
+        Ref: CheckJobResource
+      RestApiId:
+        Ref: SpeedbandsAPI
+      Integration:
+        IntegrationHttpMethod: POST
+        Type: AWS
+        Uri:
+          Fn::Sub: arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${JobCheckerLambda.Arn}/invocations
+      MethodResponses:
+      - StatusCode: '200'
+      - StatusCode: '400'
+      - StatusCode: '404'
+  CheckJobOptionsMethod:
+    Type: AWS::ApiGateway::Method
+    Properties:
+      AuthorizationType: NONE
+      RestApiId:
+        Ref: SpeedbandsAPI
+      ResourceId:
+        Ref: CheckJobResource
+      HttpMethod: OPTIONS
+      Integration:
+        IntegrationResponses:
+        - StatusCode: '200'
+          ResponseParameters:
+            method.response.header.Access-Control-Allow-Headers: '''Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'''
+            method.response.header.Access-Control-Allow-Methods: '''GET,POST,OPTIONS'''
+            method.response.header.Access-Control-Allow-Origin: '''*'''
+          ResponseTemplates:
+            application/json: ''
+        PassthroughBehavior: WHEN_NO_MATCH
+        RequestTemplates:
+          application/json: '{"statusCode": 200}'
+        Type: MOCK
+      MethodResponses:
+      - StatusCode: '200'
+        ResponseModels:
+          application/json: Empty
+        ResponseParameters:
+          method.response.header.Access-Control-Allow-Headers: false
+          method.response.header.Access-Control-Allow-Methods: false
+          method.response.header.Access-Control-Allow-Origin: false
+  SpeedbandsAPIDeployment:
+    Type: AWS::ApiGateway::Deployment
+    DependsOn:
+    - CheckJobMethod
+    - CheckJobOptionsMethod
+    - GetUserJobsMethod
+    - GetUserJobsOptionsMethod
+    - ScheduleJobMethod
+    - ScheduleJobOptionsMethod
+    Properties:
+      RestApiId:
+        Ref: SpeedbandsAPI
       StageName: default
-      Cors:
-        AllowOrigin: '''*'''
-        AllowMethods: '''GET,POST'''
-        AllowHeaders: '''Content-Type,Authorization,x-amz-security-token'''
-      Auth:
-        DefaultAuthorizer: CognitoAuthorizer
-        Authorizers:
-          CognitoAuthorizer:
-            UserPoolArn: arn:aws:cognito-idp:ap-southeast-1:537124958292:userpool/ap-southeast-1_YkAjQ6uvu

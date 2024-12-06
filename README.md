@@ -113,8 +113,9 @@ AWS Amplify is used to provide user authentication for the frontend. Below are t
    9. **Hosting**: Skip this
    10. Address any other options that arise (they may be different to above)
 3. Run `amplify add auth`
-   1. Select the options to sign in with Cognito and email/password
-   2. You may use other authentication options if you desire, but you would need to change the frontend to accomodate it.
+   1. Select "Default configuration"
+   2. Choose "Email" as the sign in method.
+   3. You may use other authentication options if you desire, but you would need to change the frontend to accomodate it.
 4. Run `amplify push` which will build the necessary resources for auth in the cloud.
 
 # 4. Install the AWS SAM CLI
@@ -134,19 +135,10 @@ The `template.yaml` file in this repo under `/backend` will allow you to deploy 
 4. Navigate to Security groups
 5. Copy and save the Security group ID for your default (only) security group.
 
-### User Pool
-
-1. On the AWS dashboard, navigate to Cognito
-2. Navigate to User Pools
-3. Click on the user pool created by Amplify in step [3](#3-setting-up-aws-amplify)
-4. Copy and save the ARN
-
 ## Ammending the YAML
 
 1. Open `template.yaml`
 2. Under `JobSchedulerLambda`, `JobCheckerLambda`, `DataCollectionLambda` and `GetUserJobsLambda`, replace the existing `SubnetIds` with the three you saved above, and replace the `SecurityGroupIds` with the one you saved above.
-3. Under `SpeedbandsAPI`, replace the existing `UserPoolArn` with the one you saved above.
-
 
 ## Deploying the resources
 
@@ -169,7 +161,18 @@ This is because the DynamoDB table and S3 bucket have `DeletionPolicy` set to `R
 
 If, for whatever reason, deployment fails, you will need to manually navigate to the AWS CloudFormation dashboard and delete the stack which is in state `ROLLBACK_COMPLETED` before you can deploy another stack with the same name.
 
-## Final Linking
+# 6. Configuring our Identity Pool
+
+## Attach Permissions to the Identity Pool Role
+
+We need to attach some permissions to the default Identity Pool IAM role that was created when we set up Amplify.
+
+1. In the AWS dashboard, navigate to IAM > Roles
+2. Select the role that has `amplify` and `authRole` in the title.
+3. Click Add permissions > Attach policies
+4. Attach the "AmazonAPIGatewayInvokeFullAccess" policy. **Note:** This may be unsafe if you plan on adding more infrastructure to your app and more endpoints. I recommend you add a specific policy that only allows access to the desired API routes.
+
+# 7. Linking Everything Together
 
 ### Lambdas
 Once the resources are deployed, you need to change the code in one of the Lambdas.
@@ -194,7 +197,7 @@ eventbridge.put_targets(
 
 Replace the string following `'Arn':` with the ARN of your DataCollection lambda.
 
-**You'll then need to re-run `sam build` and `sam deploy` to update the Lambda code.**
+**You'll then need to re-run `sam build` and `sam deploy` to update the Lambda code. You should only see "JobSchedulerLambda" and "ScheduleJobMethod" in the changeset.**
 
 ### Amplify
 
@@ -203,8 +206,8 @@ Replace the string following `'Arn':` with the ARN of your DataCollection lambda
 3. Click "APIs"
 4. Find the one you created
 5. Click "Stages"
-6. Click the one named "Stage" or otherwise not 'default'
-8. Copy the "Invoke URL" that displays for that stage..
+6. Click the one named "default", it should be the only one.
+8. Copy the "Invoke URL" that displays for that stage.
 
 You'll need to connect AWS Amplify to your the API to allow authenticated requests. In `speedbands/components/AuthProvider.tsx`:
 
