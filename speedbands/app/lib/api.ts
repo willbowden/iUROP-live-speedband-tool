@@ -1,4 +1,5 @@
 import { get } from "aws-amplify/api";
+import { fetchAuthSession } from "aws-amplify/auth";
 
 type SpeedbandType = {
   cameraId: string,

@@ -180,6 +180,16 @@ Resources:
     Properties:
       Name: SpeedbandsAPI
 
+  CognitoAuthorizer:
+    Type: AWS::ApiGateway::Authorizer
+    Properties:
+      Name: CognitoAuthorizer
+      IdentitySource: method.request.header.Authorization
+      ProviderARNs:
+        - arn:aws:cognito-idp:ap-southeast-1:537124958292:userpool/ap-southeast-1_kJQaKahMy
+      RestApiId: !Ref SpeedbandsAPI
+      Type: COGNITO_USER_POOLS
+
   JobsResource:
     Type: AWS::ApiGateway::Resource
     Properties:
@@ -212,7 +222,8 @@ Resources:
     Type: AWS::ApiGateway::Method
     Properties:
       ApiKeyRequired: false
-      AuthorizationType: AWS_IAM
+      AuthorizationType: COGNITO_USER_POOLS
+      AuthorizerId: !Ref CognitoAuthorizer
       HttpMethod: GET
       ResourceId: !Ref GetUserJobsResource
       RestApiId: !Ref SpeedbandsAPI
@@ -254,7 +265,8 @@ Resources:
     Type: AWS::ApiGateway::Method
     Properties:
       ApiKeyRequired: false
-      AuthorizationType: AWS_IAM
+      AuthorizationType: COGNITO_USER_POOLS
+      AuthorizerId: !Ref CognitoAuthorizer
       HttpMethod: GET
       ResourceId: !Ref ScheduleJobResource
       RestApiId: !Ref SpeedbandsAPI
@@ -296,7 +308,8 @@ Resources:
     Type: AWS::ApiGateway::Method
     Properties:
       ApiKeyRequired: false
-      AuthorizationType: AWS_IAM
+      AuthorizationType: COGNITO_USER_POOLS
+      AuthorizerId: !Ref CognitoAuthorizer
       HttpMethod: GET
       ResourceId: !Ref CheckJobResource
       RestApiId: !Ref SpeedbandsAPI

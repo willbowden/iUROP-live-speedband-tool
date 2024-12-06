@@ -25,21 +25,16 @@ event = {
 
 
 def lambda_handler(event, context):
-    userId = context.identity.cognito_identity_id
-
-    caller_user_id = context.identity.cognito_identity_id 
-    print(f"Caller userId: {caller_user_id}")
-
-    if not userId:
-        return {
-            "statusCode": 400,
-            "headers": CORS_HEADERS,
-            "body": json.dumps(
-                {"message": 'Error: Could not find cognito userId'}
-            ),
-        }
-
     try:
+        userId = event["requestContext"]["authorizer"]["claims"]["sub"]
+
+        if not userId:
+            return {
+                "statusCode": 400,
+                "headers": CORS_HEADERS,
+                "body": json.dumps({"message": "Error: Could not find cognito userId"}),
+            }
+
         params = {
             "TableName": DYNAMO_TABLE,
             "FilterExpression": "userId = :user_id",
@@ -75,7 +70,6 @@ def lambda_handler(event, context):
             "headers": CORS_HEADERS,
             "body": json.dumps({"message": str(e)}),
         }
-
 
 
 def format_item(item):
