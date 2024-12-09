@@ -30,12 +30,12 @@ def lambda_handler(event, context):
     job = table.get_item(Key={"jobId": job_id})["Item"]
 
     # If the job has already ended, end it
-    if datetime.now() > datetime.fromisoformat(job["endTime"]):
+    if datetime.now() > datetime.fromtimestamp(int(job["endTime"]) / 1000):
         table.update_item(
             Key={"jobId": job_id},
             UpdateExpression="SET #status = :completed",
             ExpressionAttributeNames={"#status": "status"},
-            ExpressionAttributeValues={":completed": "Completed"},
+            ExpressionAttributeValues={":completed": "Complete"},
         )
 
         # Cancel the eventbridge rule

@@ -86,7 +86,7 @@ export default function CollectionInProgress() {
     const newPercent = calculateProgress(job.startTime, job.endTime);
     if (newPercent >= 100) {
       setPercent(100);
-      router.push(`dashboard/collection/complete?jobId=${id}`);
+      router.push(`complete?jobId=${id}`);
     } else {
       setPercent(newPercent);
       setTimeout(updateProgress, 1000);

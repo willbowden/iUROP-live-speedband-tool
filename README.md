@@ -174,7 +174,20 @@ We need to attach some permissions to the default Identity Pool IAM role that wa
 3. Click Add permissions > Attach policies
 4. Attach the "AmazonAPIGatewayInvokeFullAccess" policy. **Note:** This may be unsafe if you plan on adding more infrastructure to your app and more endpoints. I recommend you add a specific policy that only allows access to the desired API routes.
 
-# 7. Linking Everything Together
+# 7. Make S3 Bucket Public
+
+In order to download job results, we need to enable public read access on our S3 bucket.
+
+**Note:** In your own AWS projects, this could be a very unsecure operation. However since our results bucket will only store data taken from the LTA public API, we don't need to worry.
+
+1. On the AWS dashboard, navigate to S3
+2. Click on the bucket whose name starts with `results`
+3. Click Permissions
+4. Change "Object Ownership" to "ACLs enabled"
+5. Under "Block public access", uncheck "Block *all* public access" and save.
+6. Under "Access control list", enable Read permission for Everyone (public access)
+
+# 8. Linking Everything Together
 
 ### Lambdas
 Once the resources are deployed, you need to change the code in one of the Lambdas.
