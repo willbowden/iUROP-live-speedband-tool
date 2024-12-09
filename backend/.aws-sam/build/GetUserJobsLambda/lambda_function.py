@@ -37,7 +37,15 @@ def lambda_handler(event, context):
 
         params = {
             "TableName": DYNAMO_TABLE,
+            "ExpressionAttributeNames": {
+                "#JI": "jobId",
+                "#SA": "status",
+                "#ST": "startTime",
+                "#ET": "endTime",
+                "#FQ": "frequencyMinutes"
+            },
             "FilterExpression": "userId = :user_id",
+            "ProjectionExpression": "#JI, #SA, #ST, #ET, #FQ",
             "ExpressionAttributeValues": {
                 ":user_id": {"S": userId}  # Attribute type 'S' denotes string
             },

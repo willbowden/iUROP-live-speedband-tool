@@ -267,7 +267,7 @@ Resources:
       ApiKeyRequired: false
       AuthorizationType: COGNITO_USER_POOLS
       AuthorizerId: !Ref CognitoAuthorizer
-      HttpMethod: GET
+      HttpMethod: POST
       ResourceId: !Ref ScheduleJobResource
       RestApiId: !Ref SpeedbandsAPI
       Integration:
@@ -310,7 +310,7 @@ Resources:
       ApiKeyRequired: false
       AuthorizationType: COGNITO_USER_POOLS
       AuthorizerId: !Ref CognitoAuthorizer
-      HttpMethod: GET
+      HttpMethod: POST
       ResourceId: !Ref CheckJobResource
       RestApiId: !Ref SpeedbandsAPI
       Integration:

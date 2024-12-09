@@ -283,7 +283,7 @@ Resources:
       AuthorizationType: COGNITO_USER_POOLS
       AuthorizerId:
         Ref: CognitoAuthorizer
-      HttpMethod: GET
+      HttpMethod: POST
       ResourceId:
         Ref: ScheduleJobResource
       RestApiId:
@@ -330,7 +330,7 @@ Resources:
       AuthorizationType: COGNITO_USER_POOLS
       AuthorizerId:
         Ref: CognitoAuthorizer
-      HttpMethod: GET
+      HttpMethod: POST
       ResourceId:
         Ref: CheckJobResource
       RestApiId:

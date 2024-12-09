@@ -1,5 +1,5 @@
-import { get } from "aws-amplify/api";
-import { fetchAuthSession } from "aws-amplify/auth";
+import * as Errors from "@/lib/errors";
+import { get, post } from "aws-amplify/api";
 
 type SpeedbandType = {
   cameraId: string,
@@ -22,27 +22,19 @@ export type JobCreationResponse = {
 
 export async function CreateJob(data: JobCreationInput): Promise<JobCreationResponse> {
   try {
-    // OMITTED FOR TESTING
-    // const response = await post({
-    //   apiName: "SpeedbandsAPI",
-    //   path: "/jobs/create",
-    //   options: {
-    //     body: data,
-    //   }
-    // }).response;
+    const response = await post({
+      apiName: "SpeedbandsAPI",
+      path: "/jobs/create",
+      options: {
+        body: data,
+      }
+    }).response;
 
-    // if (response.statusCode == 200) {
-    // return {
-    //   ...response.body.json(),
-    // };
-    // } else {
-    //   throw new Error(response.body.json().toString());
-    // }
-
-
-    return {
-      "jobId": "1234",
-      "message": "Job created successfully!"
+    if (response.statusCode == 200) {
+      const resp = await response.body.json();
+      return resp as JobCreationResponse;
+    } else {
+      throw new Error(response.body.json().toString());
     }
   } catch (error) {
     throw error;
@@ -52,8 +44,8 @@ export async function CreateJob(data: JobCreationInput): Promise<JobCreationResp
 export type JobEntry = {
   jobId: string,
   status: string,
-  startTime: string,
-  endTime: string,
+  startTime: number,
+  endTime: number,
   frequencyMinutes: number,
 }
 
@@ -62,30 +54,51 @@ export type GetUserJobsResponse = {
 }
 
 export async function GetUserJobs(): Promise<GetUserJobsResponse> {
-  return {
-    jobs: [
-      {
-        jobId: "1234",
-        status: "Pending",
-        startTime: Date.now().toString(),
-        endTime: Date.now().toString(),
-        frequencyMinutes: 5,
-      }
-    ]
-  }
-  // try {
-  //   const response = await get({
-  //     apiName: "SpeedbandsAPI",
-  //     path: "/jobs/get",
-  //   }).response;
+  try {
+    const response = await get({
+      apiName: "SpeedbandsAPI",
+      path: "/jobs/get",
+    }).response;
 
-  //   if (response.statusCode == 200) {
-  //     const jobs = await response.body.json();
-  //     return jobs as GetUserJobsResponse;
-  //   } else {
-  //     throw new Error(response.body.json().toString());
-  //   }
-  // } catch (error) {
-  //   throw error;
-  // }
+    if (response.statusCode == 200) {
+      const jobs = await response.body.json();
+      return jobs as GetUserJobsResponse;
+    } else {
+      throw new Error(response.body.json().toString());
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+type CheckJobResponse = JobEntry
+
+export async function CheckJob(jobId: string): Promise<CheckJobResponse> {
+  const data = {
+    jobId: jobId,
+  };
+
+  try {
+    const response = await post({
+      apiName: "SpeedbandsAPI",
+      options: {
+        body: data
+      },
+      path: "/jobs/check",
+    }).response;
+
+    if (response.statusCode == 200) {
+      const job = await response.body.json();
+      return job as JobEntry;
+    } else {
+      throw new Error(response.body.json().toString());
+    }
+  } catch (error) {
+    // @ts-expect-error
+    if (error.response.statusCode == 404) {
+      throw Errors.JobNotFoundError;
+    } else {
+      throw error;
+    }
+  }
 }

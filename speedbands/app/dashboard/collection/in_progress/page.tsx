@@ -1,8 +1,10 @@
 "use client"
 
-import { Button, Flex, Progress, Table, TableColumnsType, Typography } from "antd";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { CheckJob, JobEntry } from "@/lib/api";
+import { JobNotFoundError } from "@/lib/errors";
+import { Button, Flex, Modal, Progress, Table, TableColumnsType, Typography } from "antd";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const { Title } = Typography;
 
@@ -12,7 +14,6 @@ const tableStyle: React.CSSProperties = {
 
 type TableRow = {
   jobId: string;
-  cameras: number;
   duration: string;
   frequency: string;
 }
@@ -21,10 +22,6 @@ const columns: TableColumnsType<TableRow> = [
   {
     title: "Job ID",
     dataIndex: "jobId",
-  },
-  {
-    title: "Cameras",
-    dataIndex: "cameras",
   },
   {
     title: "Duration",
@@ -36,43 +33,97 @@ const columns: TableColumnsType<TableRow> = [
   }
 ]
 
+const calculateProgress = (startTime: number, endTime: number): number => {
+  const duration = endTime - startTime;
+
+  const progress = Date.now() - startTime;
+
+  return Math.floor((progress / duration) * 100);
+}
+
+const calculateDuration = (startTime: number, endTime: number): string => {
+  let mins = Math.floor((endTime - startTime) / 1000 / 60);
+
+  return `${mins} minutes`;
+}
+
 export default function CollectionInProgress() {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
   const [id,] = useState<string>(searchParams.get("jobId") || "");
+  const [job, setJob] = useState<JobEntry>();
+  const [percent, setPercent] = useState<number>(0);
 
-  const row = {
-    key: id,
-    jobId: id,
-    cameras: 0,
-    duration: "TEST",
-    frequency: "TEST",
+  const [modal, contextHolder] = Modal.useModal();
+
+  useEffect(() => {
+    if (id) {
+      CheckJob(id).then(job => setJob(job)).catch(err => {
+        if (err.name == JobNotFoundError.name) {
+          modal.error({
+            title: err.title,
+            content: (
+              <>{err.message}</>
+            ),
+            maskClosable: false,
+            onOk: () => router.push("/dashboard")
+          })
+        }
+      }
+      )
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!job) return;
+
+    updateProgress();
+  }, [job])
+
+  const updateProgress = () => {
+    if (!job) return;
+    const newPercent = calculateProgress(job.startTime, job.endTime);
+    if (newPercent >= 100) {
+      setPercent(100);
+      router.push(`dashboard/collection/complete?jobId=${id}`);
+    } else {
+      setPercent(newPercent);
+      setTimeout(updateProgress, 1000);
+    }
+  }
+
+  const row = job && {
+    key: job.jobId,
+    jobId: job.jobId,
+    duration: calculateDuration(job.startTime, job.endTime),
+    frequency: `${job.frequencyMinutes} mins`,
   }
 
   return (
-    <Flex vertical justify="space-between" style={{height: "100%", paddingBottom: "1em"}}>
+    <Flex vertical justify="space-between" style={{ height: "100%", paddingBottom: "1em" }}>
       <Flex vertical align="flex-start" gap="0.5em">
         <Title level={4}>Job In Progress</Title>
 
-        <Table<TableRow>
-          columns={columns}
-          dataSource={[row]}
-          pagination={false}
-          style={tableStyle}
-        >
-        </Table>
+        {row && (
+          <Table<TableRow>
+            columns={columns}
+            dataSource={row ? [row] : []}
+            pagination={false}
+            style={tableStyle}
+          >
+          </Table>
+        )}
 
         <Flex justify="center" align="center" style={{ width: "100%", height: "30em" }}>
           <Progress
             type="circle"
-            percent={30}
+            percent={percent}
             size={250}>
           </Progress>
         </Flex>
       </Flex>
-
-      <Flex vertical justify="flex-end" style={{height: "100%"}}>
-        <Button type="primary" danger>Cancel Job</Button>
-      </Flex>
+      {contextHolder}
     </Flex>
   )
 }

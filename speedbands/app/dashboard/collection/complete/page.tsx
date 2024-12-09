@@ -2,11 +2,12 @@
 
 import { DownloadOutlined } from "@ant-design/icons";
 import { Button, Flex, Result } from "antd";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function CollectionComplete() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [id,] = useState<string>(searchParams.get("jobId") || "");
 
   return (
@@ -27,7 +28,9 @@ export default function CollectionComplete() {
       </Flex>
 
       <Flex vertical justify="flex-end" style={{ height: "100%" }}>
-        <Button type="primary">Go Home</Button>
+        <Button type="primary"
+        onClick={() => router.push("/dashboard")}
+        >Go Home</Button>
       </Flex>
     </Flex>
   )

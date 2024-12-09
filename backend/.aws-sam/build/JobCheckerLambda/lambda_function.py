@@ -32,7 +32,9 @@ def lambda_handler(event, context):
         return {
             "statusCode": 400,
             "headers": CORS_HEADERS,
-            "body": json.dumps({"message": 'Error: "jobId" is required but was not provided!'}),
+            "body": json.dumps(
+                {"message": 'Error: "jobId" is required but was not provided!'}
+            ),
         }
 
     try:
@@ -42,7 +44,11 @@ def lambda_handler(event, context):
 
         if "Item" in response:
             status = response["Item"]["status"]["S"]
-            return {"statusCode": 200, "body": json.dumps({"jobId": job_id, "status": status})}
+            return {
+                "statusCode": 200,
+                "headers": CORS_HEADERS,
+                "body": json.dumps({"jobId": job_id, "status": status}),
+            }
         else:
             return {
                 "statusCode": 404,
@@ -51,4 +57,8 @@ def lambda_handler(event, context):
             }
 
     except Exception as e:
-        return {"statusCode": 500, "headers": CORS_HEADERS, "body": json.dumps({"message": str(e)})}
+        return {
+            "statusCode": 500,
+            "headers": CORS_HEADERS,
+            "body": json.dumps({"message": str(e)}),
+        }
