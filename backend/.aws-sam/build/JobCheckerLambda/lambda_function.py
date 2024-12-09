@@ -39,15 +39,24 @@ def lambda_handler(event, context):
 
     try:
         response = dynamodb.get_item(
-            TableName=DYNAMO_TABLE, Key={"jobId": {"S": job_id}}
+            TableName=DYNAMO_TABLE, 
+            Key={"jobId": {"S": job_id}},
+            ExpressionAttributeNames={
+                "#JI": "jobId",
+                "#SA": "status",
+                "#ST": "startTime",
+                "#ET": "endTime",
+                "#FQ": "frequencyMinutes"
+            },
+            ProjectionExpression="#JI, #SA, #ST, #ET, #FQ"
         )
 
         if "Item" in response:
-            status = response["Item"]["status"]["S"]
+            job = format_item(response["Item"])
             return {
                 "statusCode": 200,
                 "headers": CORS_HEADERS,
-                "body": json.dumps({"jobId": job_id, "status": status}),
+                "body": json.dumps(job),
             }
         else:
             return {
@@ -62,3 +71,15 @@ def lambda_handler(event, context):
             "headers": CORS_HEADERS,
             "body": json.dumps({"message": str(e)}),
         }
+    
+def format_item(item):
+    """
+    Convert DynamoDB's attribute dictionary to a plain Python dictionary.
+
+    Args:
+        item (dict): DynamoDB attribute dictionary.
+
+    Returns:
+        dict: Converted Python dictionary.
+    """
+    return {k: list(v.values())[0] for k, v in item.items()}

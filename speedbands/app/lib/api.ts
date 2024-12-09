@@ -98,6 +98,7 @@ export async function CheckJob(jobId: string): Promise<CheckJobResponse> {
     if (error.response.statusCode == 404) {
       throw Errors.JobNotFoundError;
     } else {
+      console.log(error);
       throw error;
     }
   }

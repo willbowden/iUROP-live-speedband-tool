@@ -150,7 +150,7 @@ sam build
 sam deploy --guided
 ```
 
-If you've already built but for whatever reason need to do it again, run the following command if the DynamoDB table `DataCollectionJobs` already exists:
+If you've already built but for whatever reason need to do it again, run the following command if the DynamoDB table `DataCollectionJobs` or s3 bucket for results already exists:
 
 ```bash
 sam build
@@ -160,6 +160,8 @@ sam deploy --parameter-overrides TableAlreadyExists=true ResultsBucketAlreadyExi
 This is because the DynamoDB table and S3 bucket have `DeletionPolicy` set to `Retain` which means they aren't deleted in the event of a failure or re-deploy. This is so we don't lose the data inside them.
 
 If, for whatever reason, deployment fails, you will need to manually navigate to the AWS CloudFormation dashboard and delete the stack which is in state `ROLLBACK_COMPLETED` before you can deploy another stack with the same name.
+
+> **Note:** If at any point you have to re-deploy the resources, you must also redploy the API Gateway API via the AWS dashboard, or any changes won't take effect.
 
 # 6. Configuring our Identity Pool
 

@@ -26,7 +26,7 @@ export default function NavBar() {
   }, []);
 
   return (
-    <Header style={navBarStyle} onClick={() => router.push("/")}>
+    <Header style={navBarStyle} onClick={() => router.push("/dashboard")}>
       <Title>Speedband Tool</Title>
       <Flex gap={"1em"} align="center">
         <Title level={3}>{`${userEmail?.split("@")[0]}`}</Title>
