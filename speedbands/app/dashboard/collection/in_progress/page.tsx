@@ -79,7 +79,28 @@ export default function CollectionInProgress() {
     if (!job) return;
 
     updateProgress();
+    setTimeout(recheckJob, 30000);
   }, [job])
+
+  const recheckJob = () => {
+    CheckJob(id).then(job => {
+      setJob(job)
+      if (job.status == "Failed") {
+        if (updateTimeout) clearTimeout(updateTimeout);
+        modal.error({
+          title: "Job Failed",
+          content: (
+            <>{job.reason}</>
+          ),
+          maskClosable: false,
+          onOk: () => router.push("/dashboard")
+        })
+      }
+    }
+    )
+  }
+
+  let updateTimeout: NodeJS.Timeout;
 
   const updateProgress = () => {
     if (!job) return;
@@ -89,7 +110,8 @@ export default function CollectionInProgress() {
       router.push(`complete?jobId=${id}`);
     } else {
       setPercent(newPercent);
-      setTimeout(updateProgress, 1000);
+      if (updateTimeout) clearTimeout(updateTimeout);
+      updateTimeout = setTimeout(updateProgress, 1000);
     }
   }
 

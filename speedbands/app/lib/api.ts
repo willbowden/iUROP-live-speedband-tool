@@ -47,6 +47,8 @@ export type JobEntry = {
   startTime: number,
   endTime: number,
   frequencyMinutes: number,
+  reason?: string,
+  url?: string
 }
 
 export type GetUserJobsResponse = {

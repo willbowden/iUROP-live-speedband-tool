@@ -212,7 +212,14 @@ eventbridge.put_targets(
 
 Replace the string following `'Arn':` with the ARN of your DataCollection lambda.
 
-**You'll then need to re-run `sam build` and `sam deploy` to update the Lambda code. You should only see "JobSchedulerLambda" and "ScheduleJobMethod" in the changeset.**
+Then, in `backend/lambdas/dataCollection/src/lambda_function.py` and `backend/lambdas/jobChecker/lambda_function.py`:
+```python
+S3_BUCKET = "results-537124958292-ap-southeast-1"
+```
+
+Replace the string with the name of your S3 results bucket. This can be found through the AWS dashboard.
+
+**You'll then need to re-run `sam build` and `sam deploy` to update the Lambda code. You should only see "JobSchedulerLambda", "DataCollectionLambda" and their corresponding methods in the changeset.**
 
 ### Amplify
 

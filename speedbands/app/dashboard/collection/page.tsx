@@ -36,7 +36,6 @@ const menuStyle: React.CSSProperties = {
 }
 
 const durationOptions: SliderSingleProps['marks'] = {
-  1: '1 min',
   5: '5 mins',
   10: '10 mins',
   15: '15 mins',
@@ -125,6 +124,7 @@ export default function StartCollection() {
 
           <Form.Item name="API Key" rules={[{ required: true }]} style={{width: "100%"}}>
             <Input
+              type="password"
               placeholder="Your LTA API Key"
               onChange={(e) => setApiKey(e.target.value)}></Input>
           </Form.Item>

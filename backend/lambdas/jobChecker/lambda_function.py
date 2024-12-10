@@ -7,6 +7,7 @@ dynamodb = boto3.client("dynamodb")
 s3 = boto3.client("s3")
 
 DYNAMO_TABLE = "DataCollectionJobs"
+S3_BUCKET = "results-537124958292-ap-southeast-1"
 
 CORS_HEADERS = {
     "Access-Control-Allow-Origin": "*",
@@ -53,10 +54,26 @@ def lambda_handler(event, context):
 
         if "Item" in response:
             job = format_item(response["Item"])
+
+            if job["status"] == "Complete":
+                signed_url = s3.generate_presigned_url('get_object',
+                                                       Params={
+                                                           "Bucket": S3_BUCKET,
+                                                           "Key": f"{job_id}.csv"
+                                                       },
+                                                       ExpiresIn=3600)
+
+                data = {
+                    **job,
+                    "url": signed_url 
+                }
+            else:
+                data = job
+
             return {
                 "statusCode": 200,
                 "headers": CORS_HEADERS,
-                "body": json.dumps(job),
+                "body": json.dumps(data),
             }
         else:
             return {

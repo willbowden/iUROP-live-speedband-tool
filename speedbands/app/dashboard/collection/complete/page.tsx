@@ -1,14 +1,43 @@
 "use client"
 
+import { CheckJob, JobEntry } from "@/lib/api";
 import { DownloadOutlined } from "@ant-design/icons";
-import { Button, Flex, Result } from "antd";
+import { Button, Flex, Modal, Result } from "antd";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function CollectionComplete() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [id,] = useState<string>(searchParams.get("jobId") || "");
+  const [job, setJob] = useState<JobEntry>();
+
+  const [modal, contextHolder] = Modal.useModal();
+
+  useEffect(() => {
+    CheckJob(id).then(job => {
+      setJob(job);
+      if (job.status != "Complete") {
+        modal.error({
+          title: "Job not complete",
+          content: (
+            <>This job is not complete!</>
+          ),
+          maskClosable: false,
+          onOk: () => router.push("/dashboard")
+        })
+      }
+    }).catch(err => {
+      modal.error({
+        title: err.title,
+        content: (
+          <>{err.message}</>
+        ),
+        maskClosable: false,
+        onOk: () => router.push("/dashboard")
+      })
+    })
+  }, [])
 
   return (
     <Flex vertical justify="space-between" style={{ height: "100%", paddingBottom: "1em" }}>
@@ -17,21 +46,21 @@ export default function CollectionComplete() {
           status="success"
           title="Job Complete!"
           subTitle={`Job ID: ${id}`}
-          style={{width: "100%"}}
+          style={{ width: "100%" }}
           extra={[
-            <Button type="primary" key="download" ghost>
-              <DownloadOutlined />
-              Download Results
-            </Button>,
+            <a href={job?.url} target="_blank">
+              <DownloadOutlined /> Download Results
+            </a>,
           ]}
         />
       </Flex>
 
       <Flex vertical justify="flex-end" style={{ height: "100%" }}>
         <Button type="primary"
-        onClick={() => router.push("/dashboard")}
+          onClick={() => router.push("/dashboard")}
         >Go Home</Button>
       </Flex>
+      {contextHolder}
     </Flex>
   )
 }
