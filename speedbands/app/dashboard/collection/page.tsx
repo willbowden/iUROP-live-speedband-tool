@@ -2,7 +2,7 @@
 
 import { Speedband } from "@/lib/speedband";
 import { SpeedbandContext, SpeedbandDispatchContext } from "@/lib/SpeedbandContext";
-import { Button, Flex, Form, Input, Slider, SliderSingleProps, Table, TableColumnsType, TableProps, Typography } from "antd";
+import { Button, Flex, Form, Input, Modal, Slider, SliderSingleProps, Table, TableColumnsType, TableProps, Typography } from "antd";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useContext, useState } from "react";
 import { getCurrentUser, GetCurrentUserOutput } from "aws-amplify/auth";
@@ -74,6 +74,8 @@ export default function StartCollection() {
   const { speedbands, selectedSpeedbands } = useContext(SpeedbandContext);
   const dispatch = useContext(SpeedbandDispatchContext);
 
+  const [modal, backgroundContext] = Modal.useModal();
+
   const rowSelection: TableProps<Speedband>['rowSelection'] = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: Speedband[]) => {
       dispatch({
@@ -91,6 +93,18 @@ export default function StartCollection() {
     setLoading(true);
     const { userId } = await getCurrentUser();
 
+    if (selectedSpeedbands.length <= 0) {
+      modal.error({
+        title: "No speedbands selected!",
+        content: (
+          <>You must select at least one speedband to start a collection job.</>
+        ),
+      });
+
+      setLoading(false);
+      return;
+    }
+
     const data: JobCreationInput = {
       userId: userId,
       apiKey: apiKey,
@@ -105,7 +119,9 @@ export default function StartCollection() {
     }
 
     CreateJob(data).then(res => {
-      router.push(`${pathname}/in_progress?jobId=${res.jobId}`);
+      router.push(`${pathname}/in_progress?content: (
+          <>{err.message}</>
+        ),jobId=${res.jobId}`);
     }
     );
   }
