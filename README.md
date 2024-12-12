@@ -16,7 +16,11 @@
   - [Final Linking](#final-linking)
 
 
-# AWS Setup Instructions
+# Setup Instructions
+
+These instructions will show you how to set up the AWS backend infrastructure for this application.
+Once the backend is deployed and configured, you can run the app locally by running `npm run dev` from the `/speedbands` directory.
+For information on actually building and deploying the frontend app, see [this site](https://nextjs.org/docs/pages/building-your-application/deploying)
 
 These instructions assume you already have the following:
 
